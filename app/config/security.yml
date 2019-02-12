@@ -8,6 +8,8 @@ security:
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: ROLE_ADMIN
+        ROLE_FREELANCER: ROLE_FREELANCER
+        ROLE_EMPLOYEUR: ROLE_EMPLOYEUR
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         fos_userbundle:
