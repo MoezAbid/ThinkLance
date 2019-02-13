@@ -34,7 +34,7 @@
                                     <li><a href="#">Page</a></li>
                                     <li><a href="contact.html">Contact</a></li>#}
                                     <li>
-                                        {{ app.user.username | capitalize }}
+                                        <a href="{{ path('fos_user_profile_show') }}">{{ app.user.username | capitalize }}</a>
                                     </li>
                                     <li class="active"><a href="{{ path('auth_homepage') }}">Accueil</a></li>
                                     {#<li><a href="about.html">About</a></li>
