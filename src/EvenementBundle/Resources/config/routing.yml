@@ -1,0 +1,46 @@
+read_even:
+    path:     /read
+    defaults: { _controller: EvenementBundle:Evenement:read }
+create:
+    path:     /create
+    defaults: { _controller: EvenementBundle:Evenement:create }
+delete:
+    path:     /delete/{id}
+    defaults: { _controller: EvenementBundle:Evenement:delete }
+update:
+    path:     /update/{id}
+    defaults: { _controller: EvenementBundle:Evenement:update }
+map:
+    path:     /map
+    defaults: { _controller: EvenementBundle:Default:map }
+read2:
+    path:     /read2/{id}
+    defaults: { _controller: EvenementBundle:Evenement:read2 }
+readb:
+    path:     /readb
+    defaults: { _controller: EvenementBundle:Evenement:readb }
+createb:
+    path:     /createb
+    defaults: { _controller: EvenementBundle:Categorie:createb }
+readbc:
+    path:     /readbc
+    defaults: { _controller: EvenementBundle:Categorie:readbc }
+updatebc:
+    path:     /updatebc/{id}
+    defaults: { _controller: EvenementBundle:Categorie:updatebc }
+deletebc:
+    path:     /deletebc/{id}
+    defaults: { _controller: EvenementBundle:Categorie:deletebc }
+readc:
+    path:     /readc
+    defaults: { _controller: EvenementBundle:Categorie:readc }
+updatenbr:
+    path:     /updatenbr/{id}
+    defaults: { _controller: EvenementBundle:Evenement:updatenbr }
+participer:
+    path:     /participer/{id}
+    defaults: { _controller: EvenementBundle:Participer:participer }
+index:
+    path:     /index
+    defaults: { _controller: EvenementBundle:Evenement:index }
+    methods:  GET

@@ -1,0 +1,196 @@
+<link rel="stylesheet" type="text/css" href="{{ asset('styles/bootstrap4/bootstrap.min.css') }}">
+<link href="{{ asset('plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet"
+      type="text/css">
+<link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/owl.carousel.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/owl.theme.default.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/animate.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('styles/main_styles.css') }}">
+<title>Payer freelancer</title>
+
+<!-- Header -->
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    <!-- Header Content -->
+    <div class="header_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                        <div class="logo_container">
+                            <img src="{{ asset('images/thinklance2.png') }}" height="60" width="150">
+                        </div>
+                        <nav class="main_nav_contaner ml-auto">
+                            <ul class="main_nav">
+                                <li>
+                                    <a href="{{ path('fos_user_profile_show') }}">{{ app.user.username | capitalize }}</a>
+                                </li>
+                                <li class="active"><a href="{{ path('auth_homepage') }}">Accueil</a></li>
+                                <li class="active"><a href="{{ path('liste_paiements') }}">Paiements</a></li>
+                                <li><a href="{{ path('fos_user_security_logout') }}">
+                                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                    </a>
+                                </li>
+                            </ul>
+                            {#<div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>#}
+                            <!-- Hamburger -->
+                            <div class="hamburger menu_mm">
+                                <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Header Content -->
+{% else %}
+    <!-- Header Content -->
+    <div class="header_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                        <div class="logo_container">
+                            <img src="{{ asset('images/thinklance2.png') }}" height="60" width="150">
+                        </div>
+                        <nav class="main_nav_contaner ml-auto">
+                            <ul class="main_nav">
+                                <li class="active"><a href="{{ path('auth_homepage') }}">Accueil</a></li>
+                                <li>
+                                    <a href="{{ path('fos_user_registration_register') }}" {#data-toggle="modal" #}
+                                       data-target="#exampleModalCenter2">S'inscrire</a></li>
+                                <li>
+                                    <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                                </li>
+                            </ul>
+                            <div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
+                            <!-- Hamburger -->
+                            <div class="hamburger menu_mm">
+                                <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+                            </div>
+                        </nav>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Header Content -->
+{% endif %}
+<!-- End Header Search Panel -->
+</header>
+<body>
+
+<br> <br>
+<div class="team_background parallax-window" data-parallax="scroll"
+     data-image-src="{{ asset('images/team_background.jpg') }}" data-speed="0.8"></div>
+<center>
+    <div class="card col-xs-12 col-md-4 hidden-xs hidden-sm text-center right-container">
+        <div class="card-body">
+            <div>
+                <h3 class="text-center mb-4">Vous avec {{ nbr }} missions. Vous allez donc payer : {{ montantAPayer/100 }} € à {{ freelancerAPayer }}.
+                    Veuillez insérer vos coordonnées bancaires ci-dessous : </h3>
+                <script src="https://js.stripe.com/v3/"></script>
+                <form method="POST" id="payment-form" name="payment-form">
+                    <div class="form-row">
+                        <label for="card-element">
+                            Carte de crédit
+                        </label>
+                        <div id="card-element" class="form-control">
+                            <!-- A Stripe Element will be inserted here. -->
+                        </div>
+
+                        <!-- Used to display Element errors. -->
+                        <div id="card-errors" role="alert"></div>
+                    </div>
+                    <br>
+{#                    <div class="form-group">
+                        #}{#<label>Devise : </label>#}{#
+                        #}{#<select class="custom-select" id="choixDevise" name="choixDevise">
+                            <option value="tnd">TND</option>
+                            <option value="eur">EUR</option>
+                            <option value="usd">USD</option>
+                        </select>#}{#
+                        <input id="choixDevise" name="choixDevise" type="text"/>
+                    </div>#}
+                    <br><br>
+                    <a href="{{ path('confirmer_paiement', {'idProjet' : projet.idProjet, 'montant':montantAPayer }) }}"
+                       role="button"
+                       class="btn btn-outline-info"><span
+                                class="fa fa-edit fa-lg" aria-hidden="true"></span>Payer</a>&nbsp;
+                </form>
+            </div>
+        </div>
+    </div>
+</center>
+</body>
+<script>
+    var stripe = Stripe('pk_test_yv1L647ym4K1PY28MAsonZF6');
+    var elements = stripe.elements();
+
+    // Custom styling can be passed to options when creating an Element.
+    var style = {
+        base: {
+// Add your base input styles here. For example:
+            fontSize: '16px',
+            color: "#32325d",
+        }
+    };
+
+    // Create an instance of the card Element.
+    var card = elements.create('card', {style: style});
+
+    // Add an instance of the card Element into the `card-element` <div>.
+    card.mount('#card-element');
+
+    card.addEventListener('change', function (event) {
+        var displayError = document.getElementById('card-errors');
+        if (event.error) {
+            displayError.textContent = event.error.message;
+        } else {
+            displayError.textContent = '';
+        }
+    });
+
+    // Create a token or display an error when the form is submitted.
+    var form = document.getElementById('payment-form');
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        stripe.createToken(card).then(function (result) {
+            if (result.error) {
+// Inform the customer that there was an error.
+                var errorElement = document.getElementById('card-errors');
+                errorElement.textContent = result.error.message;
+            } else {
+// Send the token to your server.
+                stripeTokenHandler(result.token);
+            }
+        });
+    });
+
+    function stripeTokenHandler(token) {
+// Insert the token ID into the form so it gets submitted to the server
+        var form = document.getElementById('payment-form');
+        var hiddenInput = document.createElement('input');
+        hiddenInput.setAttribute('type', 'hidden');
+        hiddenInput.setAttribute('name', 'stripeToken');
+        hiddenInput.setAttribute('value', token.id);
+        form.appendChild(hiddenInput);
+
+// Submit the form
+        form.submit();
+    }
+</script>
+
+<script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+<script src="{{ asset('styles/bootstrap4/popper.js') }}"></script>
+<script src="{{ asset('styles/bootstrap4/bootstrap.min.js') }}"></script>
+<script src="{{ asset('plugins/greensock/TweenMax.min.js') }}"></script>
+<script src="{{ asset('plugins/greensock/TimelineMax.min.js') }}"></script>
+<script src="{{ asset('plugins/scrollmagic/ScrollMagic.min.js') }}"></script>
+<script src="{{ asset('plugins/greensock/animation.gsap.min.js') }}"></script>
+<script src="{{ asset('plugins/greensock/ScrollToPlugin.min.js') }}"></script>
+<script src="{{ asset('plugins/OwlCarousel2-2.2.1/owl.carousel.js') }}"></script>
+<script src="{{ asset('plugins/easing/easing.js') }}"></script>
+<script src="{{ asset('plugins/parallax-js-master/parallax.min.js') }}"></script>
+<script src="{{ asset('js/custom.js') }}"></script>

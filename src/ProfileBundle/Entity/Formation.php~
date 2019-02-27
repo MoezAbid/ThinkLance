@@ -1,0 +1,173 @@
+<?php
+
+namespace ProfileBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Formation
+ *
+ * @ORM\Table(name="formation")
+ * @ORM\Entity(repositoryClass="ProfileBundle\Repository\FormationRepository")
+ */
+class Formation
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="titre", type="string", length=255,nullable=true)
+     */
+    private $titre;
+
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="DateDebut", type="datetime",nullable=true, unique=true)
+     */
+    private $dateDebut;
+
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="DateFin", type="datetime",nullable=true)
+     */
+    private $dateFin;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="institution", type="string", length=255,nullable=true)
+     */
+    private $institution;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=500,nullable=true)
+     */
+    private $description;
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinColumn(name="id_user", referencedColumnName="id")
+     *
+     */
+    private $user;
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set titre
+     *
+     * @param string $titre
+     *
+     * @return Formation
+     */
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    /**
+     * Get titre
+     *
+     * @return string
+     */
+    public function getTitre()
+    {
+        return $this->titre;
+    }
+
+
+    /**
+     * Set institution
+     *
+     * @param string $institution
+     *
+     * @return Formation
+     */
+    public function setInstitution($institution)
+    {
+        $this->institution = $institution;
+
+        return $this;
+    }
+
+    /**
+     * Get institution
+     *
+     * @return string
+     */
+    public function getInstitution()
+    {
+        return $this->institution;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Formation
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Formation
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+
+}

@@ -1,0 +1,109 @@
+{% extends "base.html.twig" %}
+{% block header %}
+    {% block navbar %}
+
+
+        <div class="header_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                            <div class="logo_container">
+                                <!--  <a href="#">
+                                      <div class="logo_text">Unic<span>at</span></div>
+                                  </a>-->
+                                <img src="{{ asset('images/thinklance2.png') }}" height="60" width="150">
+                            </div>
+
+                            <nav class="main_nav_contaner ml-auto">
+                                <ul class="main_nav">
+                                    <li>
+                                        <a href="{{ path('fos_user_profile_show') }}">{{ app.user.username | capitalize }}</a>
+                                    </li>
+                                    <li class="active"><a href="{{ path('auth_homepage') }}">Accueil</a></li>
+                                    <li><a href="{{ path('projets') }}">Mes Projets</a></li>
+                                    <li><a href="{{ path('afficheDemande') }}">Mes demandes</a></li>
+                                    {#<li><a href="blog.html">Blog</a></li>#}
+                                    {#<li><a href="#">Page</a></li>#}
+                                    {#<li><a href="contact.html">Contact</a></li>#}
+                                    <li><a href="{{ path('fos_user_security_logout') }}">
+                                            {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                        </a>
+                                    </li>
+                                </ul>
+                                {#<div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>#}
+                                <!-- Hamburger -->
+                                <div class="hamburger menu_mm">
+                                    <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+                                </div>
+                            </nav>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+{% endblock %}
+
+
+{% block content %}
+    <h1>Ajouter un projet </h1> <br> <br>
+    <div class="resumeadd-form">
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col-lg-4">
+                <span class="pf-title">Titre Projet</span>
+                <div class="pf-field">
+                    {{ form_widget(form.titreProjet) }}
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="pf-title">Nombre de jours</span>
+                <div class="pf-field">
+                    {{ form_widget(form.nbreJours) }}
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <span class="pf-title">Nom Fichiers</span>
+                <div class="pf-field">
+                    {{ form_widget(form.nomFichiers) }}
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="pf-title">Prix</span>
+                <div class="pf-field">
+                    {{ form_widget(form.prix) }}
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="pf-title">Description</span>
+                <div class="pf-field">
+                    {{ form_widget(form.description) }}
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="pf-title">Fichier</span>
+                <div class="pf-field">
+                    {{ form_widget(form.file) }}
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="pf-title">Catégorie</span>
+                <div class="pf-field">
+                    {{ form_widget(form.categorie) }}
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <button type="submit">Enregistrer</button>
+            </div>
+        </div>
+
+        </div>
+
+
+        {{ form_end(form) }}
+</div>
+{% endblock %}

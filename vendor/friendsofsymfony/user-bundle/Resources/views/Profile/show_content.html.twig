@@ -1,0 +1,20 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<center>
+    <div class="card col-xs-12 col-md-4 hidden-xs hidden-sm text-center right-container">
+        <div class="card-body">
+            <div>
+                <div class="fos_user_user_show">
+                    <h3>{{ 'profile.show.username'|trans }}: {{ user.username }}</h3>
+                    <h3>{{ 'profile.show.email'|trans }}: {{ user.email }}</h3>
+                    {% if user.roles[0] == "ROLE_FREELANCER" %}
+                        <h3>Vous êtes un Freelancer</h3>
+                    {% elseif user.roles[0] == "ROLE_EMPLOYEUR" %}
+                        <h3>Vous êtes un Employeur</h3>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</center>
+</div>

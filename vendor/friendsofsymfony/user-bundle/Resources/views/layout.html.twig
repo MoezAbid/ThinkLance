@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<link rel="stylesheet" type="text/css" href="{{ asset('styles/bootstrap4/bootstrap.min.css') }}">
+<link href="{{ asset('plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/owl.carousel.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/owl.theme.default.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/animate.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('styles/main_styles.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('styles/responsive.css') }}">
+<body>
+<div>
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        {#{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |#}
+        <!-- Header Content -->
+        <div class="header_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                            <div class="logo_container">
+                                <!--  <a href="#">
+                                      <div class="logo_text">Unic<span>at</span></div>
+                                  </a>-->
+                                <img src="{{ asset('images/thinklance2.png') }}" height="60" width="150">
+                            </div>
+                            <nav class="main_nav_contaner ml-auto">
+                                <ul class="main_nav">
+                                    {#<li><a href="about.html">About</a></li>
+                                    <li><a href="courses.html">Courses</a></li>
+                                    <li><a href="blog.html">Blog</a></li>
+                                    <li><a href="#">Page</a></li>
+                                    <li><a href="contact.html">Contact</a></li>#}
+                                    <li>
+                                        <a href="{{ path('fos_user_profile_show') }}">{{ app.user.username | capitalize }}</a>
+                                    </li>
+                                    <li class="active"><a href="{{ path('auth_homepage') }}">Accueil</a></li>
+                                    {#<li><a href="about.html">About</a></li>
+                                    <li><a href="courses.html">Courses</a></li>
+                                    <li><a href="blog.html">Blog</a></li>
+                                    <li><a href="#">Page</a></li>
+                                    <li><a href="contact.html">Contact</a></li>#}
+                                    <li><a href="{{ path('fos_user_security_logout') }}">
+                                            {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
+                                <!-- Hamburger -->
+                                <div class="hamburger menu_mm">
+                                    <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Header Content -->
+    {% else %}
+        <!-- Header Content -->
+        <div class="header_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                            <div class="logo_container">
+                                <!--  <a href="#">
+                                      <div class="logo_text">Unic<span>at</span></div>
+                                  </a>-->
+                                <img src="{{ asset('images/thinklance2.png') }}" height="60" width="150">
+                            </div>
+                            <nav class="main_nav_contaner ml-auto">
+                                <ul class="main_nav">
+                                    <li class="active"><a href="{{ path('auth_homepage') }}">Accueil</a></li>
+                                    {#<li><a href="about.html">About</a></li>
+                                    <li><a href="courses.html">Courses</a></li>
+                                    <li><a href="blog.html">Blog</a></li>
+                                    <li><a href="#">Page</a></li>
+                                    <li><a href="contact.html">Contact</a></li>#}
+                                    <li><a href="{{ path('fos_user_registration_register') }}" {#data-toggle="modal" #}
+                                           data-target="#exampleModalCenter2">S'inscrire</a></li>
+
+                                    <li><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                                    </li>
+                                </ul>
+                                <div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
+                                <!-- Hamburger -->
+                                <div class="hamburger menu_mm">
+                                    <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+                                </div>
+                            </nav>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Header Content -->
+    {% endif %}
+</div>
+
+{% if app.request.hasPreviousSession %}
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="flash-{{ type }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endif %}
+
+<div>
+    {% block fos_user_content %}
+    {% endblock fos_user_content %}
+</div>
+</body>
+</html>

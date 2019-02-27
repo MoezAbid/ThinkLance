@@ -1,0 +1,42 @@
+forum_homepage:
+    path:     /home
+    defaults: { _controller: ForumBundle:Default:index }
+f_homepage:
+    path:     /rt
+    defaults: { _controller: ForumBundle:Default:r }
+create:
+    path:     /create
+    defaults: { _controller: ForumBundle:Question:create }
+
+read:
+    path:     /read
+    defaults: { _controller: ForumBundle:Question:read }
+
+create_reponse:
+    path:     /creater
+    defaults: { _controller: ForumBundle:Reponse:create }
+
+read_reponse:
+    path:     /readr
+    defaults: { _controller: ForumBundle:Reponse:read }
+
+update_reponse:
+    path:     /updater/{id}
+    defaults: { _controller: ForumBundle:Reponse:update }
+
+delete_reponse:
+    path:     /deleter/{id}
+    defaults: { _controller: ForumBundle:Reponse:delete }
+
+
+update_question:
+    path:     /updateq/{id}
+    defaults: { _controller: ForumBundle:Question:update }
+
+delete_question:
+    path:     /deleteq/{id}
+    defaults: { _controller: ForumBundle:Question:delete }
+
+recherche_question:
+    path:     /recherche
+    defaults: { _controller: ForumBundle:Question:recherche }

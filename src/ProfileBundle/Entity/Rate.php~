@@ -1,0 +1,68 @@
+<?php
+
+namespace ProfileBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Rating
+ *
+ * @ORM\Table(name="rate")
+ * @ORM\Entity(repositoryClass="ProfileBundle\Repository\RateRepository")
+ */
+class Rate
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="rating_qualite", type="integer", nullable=true)
+     */
+    private $ratingQualite;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="rating_communication", type="integer", nullable=true)
+     */
+    private $ratingCommunication;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="rating_respect_delais", type="integer", nullable=true)
+     */
+    private $ratingRespectDelais;
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinColumn(name="id_user", referencedColumnName="id")
+     *
+     */
+    private $idEmployeur;
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinColumn(name="id_user", referencedColumnName="id")
+     *
+     */
+    private $idFrellancer;
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+
+}

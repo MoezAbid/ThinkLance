@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Paiements</title>
+
+    <link href="{{ asset('admin/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin/css/datepicker3.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin/css/styles.css') }}" rel="stylesheet">
+
+    <!--Icons-->
+    <script src="{{ asset('admin/js/lumino.glyphs.js') }}"></script>
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><span>Admin Board</span></a>
+            <ul class="user-menu">
+                <li class="dropdown pull-right">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <svg class="glyph stroked male-user">
+                            <use xlink:href="#stroked-male-user"></use>
+                        </svg> {{ app.user.username | capitalize }} <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">
+                                <svg class="glyph stroked male-user">
+                                    <use xlink:href="#stroked-male-user"></use>
+                                </svg>
+                                Profile</a></li>
+                        <li><a href="#">
+                                <svg class="glyph stroked gear">
+                                    <use xlink:href="#stroked-gear"></use>
+                                </svg>
+                                Settings</a></li>
+                        <li><a href="#">
+                                <svg class="glyph stroked cancel">
+                                    <use xlink:href="#stroked-cancel"></use>
+                                </svg>
+                                Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+    <form role="search">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+        </div>
+    </form>
+    <ul class="nav menu">
+        <!-- Drawer Moez -->
+        <li><a href="{{ path("liste_paiements") }}">
+                <svg class="glyph stroked table">
+                    <use xlink:href="#stroked-table"></use>
+                </svg>
+                Paiements</a></li>
+        <li><a href="{{ path("statistiques") }}">
+                <svg class="glyph stroked table">
+                    <use xlink:href="#stroked-table"></use>
+                </svg>
+                Statistiques paiements</a></li>
+        <li><a href="{{ path("lister_types_articles") }}">
+                <svg class="glyph stroked table">
+                    <use xlink:href="#stroked-table"></use>
+                </svg>
+                Types d'articles</a></li>
+        <li><a href="{{ path("ajouter_article") }}">
+                <svg class="glyph stroked pencil">
+                    <use xlink:href="#stroked-pencil"></use>
+                </svg>
+                Ajouter type article</a></li>
+        <!-- End Drawer Moez -->
+    </ul>
+
+</div><!--/.sidebar-->
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Statistiques sur les paiements</h1>
+        </div>
+    </div><!--/.row-->
+    <!-- Table d'affichage des paiements des utilisateurs -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">{#Advanced Table#}</div>
+                <div class="panel-body">
+                    <!-- Table Affichage des paiements -->
+                    <div class="card hidden-xs hidden-sm text-center right-container">
+                        <div class="card-body">
+                            <div>
+                                <center>
+                                    <div id="div_chart_emp"></div>
+                                    <div id="div_chart_free"></div>
+                                    <div id="div_hist_revenus_mensuels"></div>
+                                    <div id="line"></div>
+                                    <div id="combo"></div>
+                                    <div id="comboCount"></div>
+                                </center>
+                            </div>
+                        </div>
+                        <!-- End Table Affichage des paiements -->
+                    </div>
+                </div>
+            </div>
+        </div><!--/.row-->
+        <!-- End Table d'affichage des paiements des utilisateurs -->
+    </div>
+
+    <script>
+        $(function () {
+            $('#hover, #striped, #condensed').click(function () {
+                var classes = 'table';
+
+                if ($('#hover').prop('checked')) {
+                    classes += ' table-hover';
+                }
+                if ($('#condensed').prop('checked')) {
+                    classes += ' table-condensed';
+                }
+                $('#table-style').bootstrapTable('destroy')
+                    .bootstrapTable({
+                        classes: classes,
+                        striped: $('#striped').prop('checked')
+                    });
+            });
+        });
+
+        function rowStyle(row, index) {
+            var classes = ['active', 'success', 'info', 'warning', 'danger'];
+
+            if (index % 2 === 0 && index / 2 < classes.length) {
+                return {
+                    classes: classes[index / 2]
+                };
+            }
+            return {};
+        }
+    </script>
+
+    <script>
+        !function ($) {
+            $(document).on("click", "ul.nav li.parent > a > span.icon", function () {
+                $(this).find('em:first').toggleClass("glyphicon-minus");
+            });
+            $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+        }(window.jQuery);
+
+        $(window).on('resize', function () {
+            if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+        })
+        $(window).on('resize', function () {
+            if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+        })
+    </script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        {{ gc_draw(piecharteclassemployeurs, 'div_chart_emp') }}
+        {{ gc_draw(piecharteclassefreelancers, 'div_chart_free') }}
+        {{ gc_draw(combo, 'combo') }}
+        {{ gc_draw(comboCount, 'comboCount') }}
+    </script>

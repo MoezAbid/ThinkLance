@@ -1,0 +1,124 @@
+<link rel="stylesheet" type="text/css" href="{{ asset('styles/bootstrap4/bootstrap.min.css') }}">
+<link href="{{ asset('plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet"
+      type="text/css">
+<link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/owl.carousel.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/owl.theme.default.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/animate.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('styles/main_styles.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('styles/responsive.css') }}">
+<title>Ajouter article</title>
+<!-- Header -->
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    <!-- Header Content -->
+    <div class="header_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                        <div class="logo_container">
+                            <img src="{{ asset('images/thinklance2.png') }}" height="60" width="150">
+                        </div>
+                        <nav class="main_nav_contaner ml-auto">
+                            <ul class="main_nav">
+                                <li>
+                                    <a href="{{ path('fos_user_profile_show') }}">{{ app.user.username | capitalize }}</a>
+                                </li>
+                                <li class="active"><a href="{{ path('auth_homepage') }}">Accueil</a></li>
+                                <li class="active"><a href="{{ path('liste_paiements') }}">Paiements</a></li>
+                                <li><a href="{{ path('fos_user_security_logout') }}">
+                                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                    </a>
+                                </li>
+                            </ul>
+                            {#<div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>#}
+                            <!-- Hamburger -->
+                            <div class="hamburger menu_mm">
+                                <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Header Content -->
+{% else %}
+    <!-- Header Content -->
+    <div class="header_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                        <div class="logo_container">
+                            <img src="{{ asset('images/thinklance2.png') }}" height="60" width="150">
+                        </div>
+                        <nav class="main_nav_contaner ml-auto">
+                            <ul class="main_nav">
+                                <li class="active"><a href="{{ path('auth_homepage') }}">Accueil</a></li>
+                                <li>
+                                    <a href="{{ path('fos_user_registration_register') }}" {#data-toggle="modal" #}
+                                       data-target="#exampleModalCenter2">S'inscrire</a></li>
+                                <li>
+                                    <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                                </li>
+                            </ul>
+                            <div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
+                            <!-- Hamburger -->
+                            <div class="hamburger menu_mm">
+                                <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+                            </div>
+                        </nav>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Header Content -->
+{% endif %}
+<!-- End Header Search Panel -->
+</header>
+<body>
+<br> <br>
+<div class="team_background parallax-window" data-parallax="scroll"
+     data-image-src="{{ asset('images/team_background.jpg') }}" data-speed="0.8"></div>
+<center>
+    <div class="card col-xs-12 col-md-4 hidden-xs hidden-sm text-center right-container">
+        <div class="card-body">
+            <div>
+                <h3 class="text-center mb-4">Ajouter article</h3>
+                {{ form_start(form) }}
+                <div class="form-group">
+                    {{ form_widget(form.titre, {'attr': {'class': 'form-control', 'placeholder': 'Titre'  }}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_widget(form.type, {'attr': {'class': 'form-control', 'placeholder': 'Type'  }}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Description'  }}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_widget(form.texte, {'attr': {'class': 'form-control', 'rows': 5, 'placeholder': 'Texte'  }}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_widget(form.photoArticle, {'attr': {'class': 'form-control', 'required': false  }}) }}
+                </div>
+                <input type="submit" class="btn btn-outline-primary" value="Ajouter article"/>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</center>
+</body>
+<script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+<script src="{{ asset('styles/bootstrap4/popper.js') }}"></script>
+<script src="{{ asset('styles/bootstrap4/bootstrap.min.js') }}"></script>
+<script src="{{ asset('plugins/greensock/TweenMax.min.js') }}"></script>
+<script src="{{ asset('plugins/greensock/TimelineMax.min.js') }}"></script>
+<script src="{{ asset('plugins/scrollmagic/ScrollMagic.min.js') }}"></script>
+<script src="{{ asset('plugins/greensock/animation.gsap.min.js') }}"></script>
+<script src="{{ asset('plugins/greensock/ScrollToPlugin.min.js') }}"></script>
+<script src="{{ asset('plugins/OwlCarousel2-2.2.1/owl.carousel.js') }}"></script>
+<script src="{{ asset('plugins/easing/easing.js') }}"></script>
+<script src="{{ asset('plugins/parallax-js-master/parallax.min.js') }}"></script>
+<script src="{{ asset('js/custom.js') }}"></script>

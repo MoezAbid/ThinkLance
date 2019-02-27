@@ -1,0 +1,8 @@
+composer.phar
+composer.lock
+phpunit.xml
+Tests/autoload.php
+Tests/Functional/app/Behat/nginx.conf
+Tests/Functional/web/bundles
+vendor
+.php_cs.cache

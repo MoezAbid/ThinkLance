@@ -1,0 +1,239 @@
+{% block fos_message_content %}
+
+
+    <html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="{{ asset('styles/bootstrap4/bootstrap.min.css') }}">
+        <link href="{{ asset('plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/owl.carousel.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/owl.theme.default.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/animate.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('styles/main_styles.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('styles/responsive.css') }}">
+
+    </head>
+    <body>
+
+    <div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {#{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |#}
+            <!-- Header Content -->
+            <div class="header_container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                                <div class="logo_container">
+                                    <!--  <a href="#">
+                                          <div class="logo_text">Unic<span>at</span></div>
+                                      </a>-->
+                                    <img src="{{ asset('images/thinklance2.png') }}" height="60" width="150">
+                                </div>
+                                <nav class="main_nav_contaner ml-auto">
+                                    <ul class="main_nav">
+                                        {#<li><a href="about.html">About</a></li>
+                                        <li><a href="courses.html">Courses</a></li>
+                                        <li><a href="blog.html">Blog</a></li>
+                                        <li><a href="#">Page</a></li>
+                                        <li><a href="contact.html">Contact</a></li>#}
+                                        <li>
+                                            <a href="{{ path('fos_user_profile_show') }}">{{ app.user.username | capitalize }}</a>
+                                        </li>
+
+                                        <li class="active"><a href="{{ path('auth_homepage') }}">Accueil</a></li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reclamation</a>
+
+                                        </li>
+
+                                        {#   <li class="nav-item dropdown">
+                                               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Notifications</a>
+                                               <div class="dropdown-menu" style="overflow-y: scroll;scrollbar-width: thin;">
+
+
+                                                   {% for r in notif %}
+
+
+                                                       <div class="container" style="text-decoration-color: #721c24" >
+                                                           Reclamation de l'administrateur<br>
+                                                           {{ r.title}}<br>
+                                                           {{ r.description }}<br>
+
+
+                                                           <hr color="blue">
+                                                       </div>
+                                                   {% endfor %}
+
+
+                                               </div>
+                                           </li>#}
+                                        {#<li><a href="about.html">About</a>
+                                        <li><a href="courses.html">Courses</a></li>
+                                        <li><a href="blog.html">Blog</a></li>
+                                        <li><a href="#">Page</a></li>
+                                        <li><a href="contact.html">Contact</a></li>#}
+                                        <li><a href="{{ path('fos_user_security_logout') }}">
+                                                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                    <div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
+                                    <!-- Hamburger -->
+                                    <div class="hamburger menu_mm">
+                                        <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Header Content -->
+        {% else %}
+            <!-- Header Content -->
+            <div class="header_container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                                <div class="logo_container">
+                                    <!--  <a href="#">
+                                          <div class="logo_text">Unic<span>at</span></div>
+                                      </a>-->
+                                    <img src="{{ asset('images/thinklance2.png') }}" height="60" width="150">
+                                </div>
+                                <nav class="main_nav_contaner ml-auto">
+                                    <ul class="main_nav">
+
+                                        <li class="active"><a href="{{ path('auth_homepage') }}">Accueil</a></li>
+                                        {#<li><a href="about.html">About</a></li>
+                                        <li><a href="courses.html">Courses</a></li>
+                                        <li><a href="blog.html">Blog</a></li>
+                                        <li><a href="#">Page</a></li>
+                                        <li><a href="contact.html">Contact</a></li>#}
+                                        <li><a href="{{ path('fos_user_registration_register') }}" {#data-toggle="modal" #}
+                                               data-target="#exampleModalCenter2">S'inscrire</a></li>
+
+                                        <li><a href="{{ path('read') }}" {#data-toggle="modal" #}
+                                               data-target="#exampleModalCenter2">Forum</a></li>
+
+                                        <li><a href="{{ path('read_article') }}" {#data-toggle="modal" #}
+                                               data-target="#exampleModalCenter2">Blog</a></li>
+
+                                        <li><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                                        </li>
+                                    </ul>
+                                    <div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
+                                    <!-- Hamburger -->
+                                    <div class="hamburger menu_mm">
+                                        <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+                                    </div>
+                                </nav>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Header Content -->
+        {% endif %}
+    </div>
+
+    <div style="width: 1000px; height: 300px; text-align: center; border-radius: 4px; margin: 0 auto; margin-top: 30px; margin-bottom: 200px;>
+    <div style="margin-left: 50px">
+    <!--Section heading-->
+
+    <!--Section description-->
+
+
+
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+
+                <p>
+                    <a href="{{ url('fos_message_thread_new' )}}">{% trans from 'FOSMessageBundle' %}<button class="btn btn-info" >Envoyer un nouveau Message</button>{% endtrans %}</a>
+
+
+                <p>
+                    <th scope="col"> <a href="{{ url('fos_message_inbox') }}">{% trans from 'FOSMessageBundle' %}<button type="button" class="btn btn-success">Boite de réception</button>{% endtrans %}</a>
+
+
+
+                <p>
+                    <th scope="col"> <a href="{{ url('fos_message_sent') }}">{% trans from 'FOSMessageBundle' %}<button type="button" class="btn btn-success">Messages envoyés</button>{% endtrans %}</a>
+
+                <p>
+
+                <p>
+                <th scope="col"><a href="{{ url('fos_message_deleted') }}">{% trans from 'FOSMessageBundle' %}<button type="button" class="btn btn-success">Corbeille</button>{% endtrans %}</a>
+
+
+
+            </li>
+            <li class="page-item"><a class="page-link" href="#">
+
+
+
+                    <h2>{% trans from 'FOSMessageBundle' %}deleted{% endtrans %}</h2>
+
+                    {% include 'FOSMessageBundle:Message:threads_list.html.twig' with {'threads': threads} %}
+
+
+
+
+
+                </a></li>
+
+            </li>
+        </ul>
+    </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    </div>
+
+    <footer class="page-footer " style="background: black">
+
+
+        <div class="logo_container">
+            <img src="{{ asset('images/thinklance2.png') }}" height="100" width="170">
+        </div>
+
+
+    </footer>
+
+    <!-- Footer -->
+    </body>
+    </html>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+

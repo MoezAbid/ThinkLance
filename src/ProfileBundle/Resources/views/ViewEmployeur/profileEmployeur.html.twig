@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="CreativeLayers">
+
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('lol/css/bootstrap-grid.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('lol/css/icons.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('lol/css/animate.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('lol/css/style.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('lol/css/responsive.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('lol/css/chosen.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('lol/css/colors/colors.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('lol/css/bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{ asset('lol/lol/css/font-awesome.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/bootstrap4/bootstrap.min.css') }}">
+    <link href="{{ asset('plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css"   href="{{ asset('plugins/OwlCarousel2-2.2.1/owl.carousel.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/owl.theme.default.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/animate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/main_styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/responsive.css') }}">
+
+</head>
+<body>
+
+
+<div class="theme-layout" id="scrollup">
+
+    <header class="header">
+        <div class="top_bar bg-white">
+            <div class="top_bar_container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="top_bar_content d-flex flex-row align-items-center justify-content-start">
+                                <ul class="top_bar_contact_list">
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% block header %}
+
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {% if (is_granted('ROLE_FREELANCER')) %}
+                <header class="stick-top bg-white">
+                    <div class="menu-sec">
+                        <div class="container">
+                            <div class="res-logo">
+                                <a href="index.html" title=""><img src="{{ asset('images/thinklance2.png') }}"
+                                                                   height="60" width="90" alt=""/></a>
+                            </div><!-- Logo -->
+                            <div class="btns-profiles-sec">
+                                    <span><img src="{{ asset('images1/') }}{{ app.user.nomImage }}" height="50px"
+                                               width="50px" alt=""/>  <a
+                                                style="color: black;font-family:'Roboto Slab';font-weight: bold;font-size: 15px">{{ app.user.username | capitalize }} {{ app.user.firstname | capitalize }}</a> <i
+                                                class="la la-angle-down"
+                                                style="color: black;font-size: 20px"></i></span>
+
+                                <ul>
+
+                                    <li><a href="#" title=""><i class="la la-user"></i>Mon Profil</a></li>
+
+                                    <li><a href="{{ path('fos_user_security_logout') }}">
+                                            <i class="la la-history"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div style="padding: 20px;border-top: 1px solid #e8ecec">
+
+                                            <p>Envie de travailler?</p>
+                                            <a href="{{ path('create_profile_page') }}" title=""> Créer mon profil
+                                                Freelance</a>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            </div>
+
+                            <div class="wishlist-dropsec">
+                                <span><i class="la la-bell" style="color: black;font-size: 30px"></i></span>
+                                <div class="wishlist-dropdown">
+                                    <ul class="scrollbar">
+                                        {{ render(controller('ProfileBundle:Default:displayNotification')) }}
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <nav class="main_nav_contaner ml-auto">
+                                <ul class="main_nav">
+
+                                    <li class="menu-item-has-children">
+                                        <a href="#" title="" style="color:black">Mes Participations</a>
+                                        <ul>
+                                            <li><a class="dropdown-item" href="{{ path('read_even') }}">Lister
+                                                    les evenements</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item-has-children">
+
+                                        <a href="#" title="" style="color:black">Communication</a>
+                                        <ul>
+                                            <li><a href="{{ path('liste_articles') }}" title="">Liste des articles</a></li>
+                                            <li><a href="{{ path('mes_articles') }}" title="">Mes Articles</a></li>
+                                            <li><a href="{{ path('actualite_homepage') }}" title="">Actualités</a></li>
+                                            <li><a href="{{ path('forum_homepage') }}" title="">Forum</a></li>
+                                            <li><a href="{{ path('fos_message_inbox') }}" title="">Messagerie</a></li>
+
+                                        </ul>
+                                    </li>
+                                    {#   <li> <a>Messagerie</a> </li>#}
+                                    <li></li>
+                                    <li class="menu-item-has-children">
+
+                                        <a href="#" title="" style="color:black">Paiements</a>
+                                        <ul>
+                                            <li><a href="{{ path('liste_paiements') }}" title="">Mes paiements</a></li>
+                                            <li><a href="{{ path('statistiques') }}" title="">Statistiques</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item-has-children">
+
+                                        <a href="#" title="" style="color:black">Mes Réclamations</a>
+                                        <ul>
+
+                                            <li><a class="dropdown-item" href="{{ path('reclamation_affiche') }}">Lister
+                                                    les réclamations</a></li>
+                                            <li><a class="dropdown-item" href="{{ path('reclamation_ajout') }}">effectuer
+                                                    une réclamation</a></li>
+
+                                        </ul>
+                                    </li>
+
+
+                                </ul>
+
+                                <!-- Hamburger -->
+                                <div class="hamburger menu_mm">
+                                    <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+                                </div>
+                            </nav>
+
+
+                            <!-- Menus -->
+                        </div>
+                    </div>
+                </header>
+            {% else %}
+                <!-- User Employeur-->
+
+                <header class="stick-top bg-white">
+                    <div class="menu-sec">
+                        <div class="container">
+                            <div class="res-logo">
+                                <a href="index.html" title=""><img src="{{ asset('images/thinklance2.png') }}"
+                                                                   height="60" width="120" alt=""/></a>
+                            </div><!-- Logo -->
+                            <div class="btns-profiles-sec">
+                                    <span><img src="{{ asset('images1/') }}{{ app.user.nomImage }}" height="50px"
+                                               width="50px" alt=""/>  <a
+                                                style="color: black;font-family:'Roboto Slab';font-weight: bold;font-size: 15px">{{ app.user.username | capitalize }} {{ app.user.firstname | capitalize }}</a> <i
+                                                class="la la-angle-down"
+                                                style="color: black;font-size: 20px"></i></span>
+
+                                <ul>
+
+                                    <li><a href="#" title=""><i class="la la-user"></i>Mon Profil</a></li>
+
+                                    <li><a href="{{ path('fos_user_security_logout') }}">
+                                            <i class="la la-history"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div style="padding: 20px;border-top: 1px solid #e8ecec">
+
+                                            <p>Envie de travailler?</p>
+                                            <a href="{{ path('employeur_create_profile') }}" title=""> Créer mon profil
+                                                Employeur</a>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            </div>
+
+                            <div class="wishlist-dropsec">
+                                <span><i class="la la-bell" style="color: black;font-size: 30px"></i></span>
+                                <div class="wishlist-dropdown">
+                                    <ul class="scrollbar">
+                                        {# {{ render(controller('ProjetBundle:Demande:demanderProjet')) }}#}
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <nav class="main_nav_contaner ml-auto">
+                                <ul class="main_nav">
+
+                                    <li class="menu-item-has-children">
+                                        <a href="#" title="" style="color:black">Mes Participations</a>
+                                        <ul>
+                                            <li><a class="dropdown-item" href="{{ path('read_even') }}">Lister
+                                                    les evenements</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item-has-children">
+
+                                        <a href="#" title="" style="color:black">Communication</a>
+                                        <ul>
+                                            <li><a href="{{ path('liste_articles') }}" title="">Liste des articles</a></li>
+                                            <li><a href="{{ path('mes_articles') }}" title="">Mes Articles</a></li>
+                                            <li><a href="{{ path('actualite_homepage') }}" title="">Actualités</a></li>
+                                            <li><a href="{{ path('forum_homepage') }}" title="">Forum</a></li>
+                                            <li><a href="{{ path('fos_message_inbox') }}" title="">Messagerie</a></li>
+
+                                        </ul>
+                                    </li>
+                                    {#   <li> <a>Messagerie</a> </li>#}
+                                    <li></li>
+                                    <li class="menu-item-has-children">
+
+                                        <a href="#" title="" style="color:black">Paiements</a>
+                                        <ul>
+                                            <li><a href="{{ path('liste_paiements') }}" title="">Mes paiements</a></li>
+                                            <li><a href="{{ path('statistiques') }}" title="">Statistiques</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item-has-children">
+
+                                        <a href="#" title="" style="color:black">Mes Réclamations</a>
+                                        <ul>
+
+                                            <li><a class="dropdown-item" href="{{ path('reclamation_affiche') }}">Lister
+                                                    les réclamations</a></li>
+                                            <li><a class="dropdown-item" href="{{ path('reclamation_ajout') }}">effectuer
+                                                    une réclamation</a></li>
+
+                                        </ul>
+                                    </li>
+
+
+                                </ul>
+
+                                <!-- Hamburger -->
+                                <div class="hamburger menu_mm">
+                                    <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+                                </div>
+                            </nav>
+
+
+                            <!-- Menus -->
+                        </div>
+                    </div>
+                </header>
+
+
+            {% endif %}
+        {% else %}
+            <!-- Header Content -->
+            <div class="header_container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                                <div class="logo_container">
+                                    <!--  <a href="#">
+                                          <div class="logo_text">Unic<span>at</span></div>
+                                      </a>-->
+                                    <img src="{{ asset('images/thinklance2.png') }}" height="60" width="90">
+                                </div>
+                                <nav class="main_nav_contaner ml-auto">
+                                    <ul class="main_nav">
+                                        <li class="active"><a href="{{ path('auth_homepage') }}">Accueil</a></li>
+                                        {#<li><a href="about.html">About</a></li>
+                                        <li><a href="courses.html">Courses</a></li>
+                                        <li><a href="blog.html">Blog</a></li>
+                                        <li><a href="#">Page</a></li>
+                                        <li><a href="contact.html">Contact</a></li>#}
+                                        <li>
+                                            <a href="{{ path('fos_user_registration_register') }}" {#data-toggle="modal" #}
+                                               data-target="#exampleModalCenter2">S'inscrire</a></li>
+
+                                        <li>
+                                            <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                                        </li>
+                                    </ul>
+                                    <div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
+                                    <!-- Hamburger -->
+                                    <div class="hamburger menu_mm">
+                                        <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+                                    </div>
+                                </nav>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Header Content -->
+        {% endif %}
+
+
+        <div class="responsive-header">
+            <div class="responsive-menubar">
+                <div class="res-logo"><a href="index.html" title=""><img
+                                src="{{ asset('images/resource/logo.png') }}" alt=""/></a></div>
+                <div class="menu-resaction">
+                    <div class="res-openmenu">
+                        <img src="{{ asset('images/icon.png') }}" alt=""/> Menu
+                    </div>
+                    <div class="res-closemenu">
+                        <img src="{{ asset('images/icon2.png') }}" alt=""/> Close
+                    </div>
+                </div>
+            </div>
+            <div class="responsive-opensec">
+                <div class="btn-extars">
+                    <a href="#" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
+                    <ul class="account-btns">
+                        <li class="signup-popup"><a title=""><i class="la la-key"></i> Sign Up</a></li>
+                        <li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Login</a>
+                        </li>
+                    </ul>
+                </div><!-- Btn Extras -->
+                <form class="res-search">
+                    <input type="text" placeholder="Job title, keywords or company name"/>
+                    <button type="submit"><i class="la la-search"></i></button>
+                </form>
+                <div class="responsivemenu">
+                    <ul>
+                        <li class="menu-item-has-children">
+                            <a href="#" title="">Home</a>
+                            <ul>
+                                <li><a href="index.html" title="">Home Layout 1</a></li>
+                                <li><a href="index2.html" title="">Home Layout 2</a></li>
+                                <li><a href="index3.html" title="">Home Layout 3</a></li>
+                                <li><a href="index4.html" title="">Home Layout 4</a></li>
+                                <li><a href="index5.html" title="">Home Layout 5</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    {% endblock %}
+        {#    {% block header %}
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <header class="stick-top bg-white">
+                        <div class="menu-sec">
+                            <div class="container">
+                                <div class="res-logo">
+                                    <a href="index.html" title=""><img src="{{ asset('images/thinklance2.png') }}" height="60"
+                                                                       width="180" alt=""/></a>
+                                </div><!-- Logo -->
+                                <div class="btns-profiles-sec">
+                                    <span><img src="{{ asset('images1/') }}{{app.user.nomImage }}"  height="50px" width="50px"
+                                               alt=""/>  <a
+                                                style="color: black;font-family:'Roboto Slab';font-weight: bold;font-size: 15px">{{ app.user.username | capitalize }} {{ app.user.firstname | capitalize }}</a> <i
+                                                class="la la-angle-down" style="color: black;font-size: 20px"></i></span>
+                                    <ul>
+
+
+                                        <li><a href="#" title=""><i class="la la-key"></i>Paramètres de compte</a></li>
+
+                                        <li><a href="{{ path('fos_user_security_logout') }}">
+                                                <i class="la la-history"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <div style="padding: 20px;border-top: 1px solid #e8ecec">
+
+                                                <p>Envie de travailler?</p>
+                                                <a title="" href="{{ path('profile_homepage') }}"> Créer un profil
+                                                    Freelance</a> </a>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                </div>
+
+                                <div class="wishlist-dropsec">
+                                    <span><i class="la la-bell"
+                                             style="color: black;font-size: 30px"></i><strong>3</strong></span>
+                                    <div class="wishlist-dropdown">
+                                        <ul class="scrollbar">
+                                            <li>
+                                                <div class="job-listing">
+                                                    <div class="job-title-sec">
+                                                        <div class="c-logo"><img src="{{ asset('images/resource/l1.png') }}"
+                                                                                 alt=""/></div>
+                                                        <h3><a href="#" title="">Web Designer / Developer</a></h3>
+                                                        <span>Massimo Artemisis</span>
+                                                    </div>
+                                                </div><!-- Job -->
+                                            </li>
+                                            <li>
+                                                <div class="job-listing">
+                                                    <div class="job-title-sec">
+                                                        <div class="c-logo"><img src="{{ asset('images/resource/l2.png') }}"
+                                                                                 alt=""/></div>
+                                                        <h3><a href="#" title="">C Developer (Senior) C .Net</a></h3>
+                                                        <span>StarHealth</span>
+                                                    </div>
+                                                </div><!-- Job -->
+                                            </li>
+                                            <li>
+                                                <div class="job-listing">
+                                                    <div class="job-title-sec">
+                                                        <div class="c-logo"><img src="{{ asset('images/resource/l3.png') }}"
+                                                                                 alt=""/></div>
+                                                        <h3><a href="#" title="">Marketing Director</a></h3>
+                                                        <span>Tix Dog</span>
+                                                    </div>
+                                                </div><!-- Job -->
+                                            </li>
+                                            <li>
+                                                <div class="job-listing">
+                                                    <div class="job-title-sec">
+                                                        <div class="c-logo"><img src="{{ asset('images/resource/l4.png') }}"
+                                                                                 alt=""/></div>
+                                                        <h3><a href="#" title="">Web Designer / Developer</a></h3>
+                                                        <span>Massimo Artemisis</span>
+                                                    </div>
+                                                </div><!-- Job -->
+                                            </li>
+                                            <li>
+                                                <div class="job-listing">
+                                                    <div class="job-title-sec">
+                                                        <div class="c-logo"><img src="{{ asset('images/resource/l5.png') }}"
+                                                                                 alt=""/></div>
+                                                        <h3><a href="#" title="">Web Designer / Developer</a></h3>
+                                                        <span>Massimo Artemisis</span>
+                                                    </div>
+                                                </div><!-- Job -->
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <nav class="main_nav_contaner ml-auto">
+                                    <ul class="main_nav">
+                                        <li>
+                                            <a href="{{ path('fos_user_profile_show') }}">{{ app.user.username | capitalize }}</a>
+                                        </li>
+                                        <li class="active"><a href="{{ path('auth_homepage') }}"
+                                                              style="color: black;font-family: 'Roboto';font-size:17px ">Acceuil</a>
+                                        </li>
+
+                                    </ul>
+
+                                    <!-- Hamburger -->
+                                    <div class="hamburger menu_mm">
+                                        <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+                                    </div>
+                                </nav>
+
+
+                                <!-- Menus -->
+                            </div>
+                        </div>
+                    </header>
+
+                {% endif %}
+
+
+            {% endblock %}#}
+
+    </header>
+
+
+
+
+    <section class="overlape">
+        <div class="block no-padding">
+            <div data-velocity="-.1" style="background: url(images/resource/mslider1.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div><!-- PARALLAX BACKGROUND IMAGE -->
+            <div class="container fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="inner-header">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="block">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 column">
+                        <div class="job-single-sec style3">
+                            <div class="job-head-wide">
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <div class="job-single-head3 emplye">
+                                            <div class="job-thumb"> <img src="{{ asset('images1/') }}{{ app.user.nomImage }}" alt="" /></div>
+                                            <div class="job-single-info3">
+                                                <h3>{{ app.user.username }} {{ app.user.firstName }}</h3>
+                                                <span><i class="la la-map-marker"></i>{{ app.user.ville }}, {{ app.user.pays }}</span>
+                                         {#       <ul class="tags-jobs">
+                                                    <li><i class="la la-file-text"></i> Applications 1</li>
+                                                    <li><i class="la la-calendar-o"></i> Post Date: July 29, 2017</li>
+                                                    <li><i class="la la-eye"></i> Views 5683</li>
+                                                </ul>#}
+                                            </div>
+                                        </div><!-- Job Head -->
+                                    </div>
+                                    <div class="col-lg-2">
+
+                                        <div class="emply-btns">
+                                            <a class="seemap" href="#" title=""><i class="la la-edit"></i> Modifier profil</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-wide-devider">
+                                <div class="row">
+                                    <div class="col-lg-8 column">
+
+                                        <div class="recent-jobs">
+                                            <h3>Liste de mes projets proposés</h3>
+                                            <div class="job-list-modern">
+                                                <div class="job-listings-sec no-border">
+                                                    <div class="job-listing wtabs noimg">
+                                                        <div class="job-title-sec">
+                                                            <h3><a href="#" title="">Marketing Dairector</a></h3>
+                                                            <span>Massimo Artemisis</span>
+                                                            <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
+                                                        </div>
+
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {#    <div class="recent-jobs">
+                                            <h3>Mes Freelancers Favories </h3>
+                                            <div class="job-list-modern">
+                                                <div class="job-listings-sec no-border">
+                                                    <div class="job-listing wtabs noimg">
+                                                        <div class="job-title-sec">
+                                                            <h3><a href="#" title="">Marketing Dairector</a></h3>
+                                                            <span>Massimo Artemisis</span>
+                                                            <div class="job-lctn"><i class="la la-map-marker"></i>Sacramento, California</div>
+                                                        </div>
+
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>#}
+                                    </div>
+                                    <div class="col-lg-4 column">
+                                        <div class="job-overview">
+                                            <h3> Information sur mon profil</h3>
+                                            <ul>
+                                                <li><i class="la la-bank "></i><h3>Nom Entreprise</h3><span>{{ app.user.nomEntreprise }}</span></li>
+                                                <li><i class="la la-edit"></i><h3>Description </h3><span>{{ app.user.description }}</span></li>
+
+</ul>
+                                        </div><!-- Job Overview -->
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+</div>
+
+<div class="account-popup-area signin-popup-box">
+    <div class="account-popup">
+        <span class="close-popup"><i class="la la-close"></i></span>
+        <h3>User Login</h3>
+        <span>Click To Login With Demo User</span>
+        <div class="select-user">
+            <span>Candidate</span>
+            <span>Employer</span>
+        </div>
+        <form>
+            <div class="cfield">
+                <input type="text" placeholder="Username" />
+                <i class="la la-user"></i>
+            </div>
+            <div class="cfield">
+                <input type="password" placeholder="********" />
+                <i class="la la-key"></i>
+            </div>
+            <p class="remember-label">
+                <input type="checkbox" name="cb" id="cb1"><label for="cb1">Remember me</label>
+            </p>
+            <a href="#" title="">Forgot Password?</a>
+            <button type="submit">Login</button>
+        </form>
+        <div class="extra-login">
+            <span>Or</span>
+            <div class="login-social">
+                <a class="fb-login" href="#" title=""><i class="fa fa-facebook"></i></a>
+                <a class="tw-login" href="#" title=""><i class="fa fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+</div><!-- LOGIN POPUP -->
+
+<div class="account-popup-area signup-popup-box">
+    <div class="account-popup">
+        <span class="close-popup"><i class="la la-close"></i></span>
+        <h3>Sign Up</h3>
+        <div class="select-user">
+            <span>Candidate</span>
+            <span>Employer</span>
+        </div>
+        <form>
+            <div class="cfield">
+                <input type="text" placeholder="Username" />
+                <i class="la la-user"></i>
+            </div>
+            <div class="cfield">
+                <input type="password" placeholder="********" />
+                <i class="la la-key"></i>
+            </div>
+            <div class="cfield">
+                <input type="text" placeholder="Email" />
+                <i class="la la-envelope-o"></i>
+            </div>
+            <div class="dropdown-field">
+                <select data-placeholder="Please Select Specialism" class="chosen">
+                    <option>Web Development</option>
+                    <option>Web Designing</option>
+                    <option>Art & Culture</option>
+                    <option>Reading & Writing</option>
+                </select>
+            </div>
+            <div class="cfield">
+                <input type="text" placeholder="Phone Number" />
+                <i class="la la-phone"></i>
+            </div>
+            <button type="submit">Signup</button>
+        </form>
+        <div class="extra-login">
+            <span>Or</span>
+            <div class="login-social">
+                <a class="fb-login" href="#" title=""><i class="fa fa-facebook"></i></a>
+                <a class="tw-login" href="#" title=""><i class="fa fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+</div><!-- SIGNUP POPUP -->
+
+
+<script data-cfasync="false"
+        src="{{ asset('lol/../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js') }}"></script>
+<script src="{{ asset('lol/js/jquery.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('lol/js/modernizr.js') }}" type="text/javascript"></script>
+<script src="{{ asset('lol/js/script.js') }}" type="text/javascript"></script>
+<script src="{{ asset('lol/js/bootstrap.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('lol/js/wow.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('lol/js/slick.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('lol/js/parallax.js') }}" type="text/javascript"></script>
+<script src="{{ asset('lol/js/select-chosen.js') }}" type="text/javascript"></script>
+<script src="{{ asset('lol/js/jquery.scrollbar.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/typeahead.jquery.js') }}" type="text/javascript"></script>
+
+</body>
+
+<!-- Mirrored from grandetest.com/theme/jobhunt-html/employer_single1.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 15 Feb 2019 14:56:28 GMT -->
+</html>
+

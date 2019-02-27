@@ -1,0 +1,51 @@
+paiement_homepage:
+  path:     /
+  defaults: { _controller: PaiementBundle:Default:index }
+
+liste_paiements:
+  path:     /liste/
+  defaults: { _controller: PaiementBundle:Paiement:listerPaiements }
+
+supprimer_paiement:
+  path:     /liste/supprimer/{id}
+  defaults: { _controller: PaiementBundle:Paiement:rembourserPaiement }
+
+payer_freelancer:
+  path:     /payer/{idProjet}
+  defaults: { _controller: PaiementBundle:Paiement:payerFreelancer }
+
+confirmer_paiement:
+  path:     /payer/confirmer/{idProjet}/{montant}
+  defaults: { _controller: PaiementBundle:Paiement:confirmerPayement }
+
+facture:
+  path:     /facture/{id}
+  defaults: { _controller: PaiementBundle:Paiement:pdf }
+
+statistiques:
+  path:     /statistiques
+  defaults: { _controller: PaiementBundle:Paiement:afficherStatistiques }
+
+search_paiements_admin_id:
+  path:     /recherche/admin_id
+  defaults: { _controller: PaiementBundle:Paiement:rechecherPaiementsAdminId }
+
+search_paiements_admin_employeur:
+  path:     /recherche/admin_employeur
+  defaults: { _controller: PaiementBundle:Paiement:rechecherPaiementsAdminEmployeur }
+
+search_paiements_admin_freelancer:
+  path:     /recherche/admin_freelancer
+  defaults: { _controller: PaiementBundle:Paiement:rechecherPaiementsAdminFreelancer }
+
+search_paiements_admin_projet:
+  path:     /recherche/admin_projet
+  defaults: { _controller: PaiementBundle:Paiement:rechecherPaiementsAdminProjet }
+
+search_paiements_admin_montant:
+  path:     /recherche/admin_montant
+  defaults: { _controller: PaiementBundle:Paiement:rechecherPaiementsAdminMontant }
+
+search_paiements_admin_date:
+  path:     /recherche/admin_date
+  defaults: { _controller: PaiementBundle:Paiement:rechecherPaiementsAdminDate }

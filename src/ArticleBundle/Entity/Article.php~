@@ -1,0 +1,229 @@
+<?php
+
+namespace ArticleBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Article
+ *
+ * @ORM\Table(name="article")
+ * @ORM\Entity(repositoryClass="ArticleBundle\Repository\ArticleRepository")
+ */
+class Article
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="titre", type="string", length=255)
+     */
+    private $titre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="texte", type="string", length=15000)
+     */
+    private $texte;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=750)
+     */
+    private $description;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateHeure", type="datetime")
+     */
+    private $dateHeure;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinColumn(name="utilisateur", referencedColumnName="id")
+     *
+     */
+    private $utilisateur;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ArticleBundle\Entity\TypeArticle")
+     * @ORM\JoinColumn(name="type", referencedColumnName="id")
+     *
+     */
+    private $type;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     *
+     * @Assert\File(mimeTypes={ "image/jpeg", "image/png" })
+     */
+    //@Assert\NotBlank(message="Veuillez specificer la photo de l'article.")
+    private $photoArticle;
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set titre
+     *
+     * @param string $titre
+     *
+     * @return Article
+     */
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    /**
+     * Get titre
+     *
+     * @return string
+     */
+    public function getTitre()
+    {
+        return $this->titre;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Article
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set dateHeure
+     *
+     * @param \DateTime $dateHeure
+     *
+     * @return Article
+     */
+    public function setDateHeure($dateHeure)
+    {
+        $this->dateHeure = $dateHeure;
+
+        return $this;
+    }
+
+    /**
+     * Get dateHeure
+     *
+     * @return \DateTime
+     */
+    public function getDateHeure()
+    {
+        return $this->dateHeure;
+    }
+    //Foreign key
+
+    /**
+     * Set utilisateur
+     *
+     * @param \AppBundle\Entity\User $utilisateur
+     *
+     * @return Article
+     */
+    public function setUtilisateur(\AppBundle\Entity\User $utilisateur = null)
+    {
+        $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get utilisateur
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUtilisateur()
+    {
+        return $this->utilisateur;
+    }
+
+    /**
+     * Set texte
+     *
+     * @param string $texte
+     *
+     * @return Article
+     */
+    public function setTexte($texte)
+    {
+        $this->texte = $texte;
+
+        return $this;
+    }
+
+    /**
+     * Get texte
+     *
+     * @return string
+     */
+    public function getTexte()
+    {
+        return $this->texte;
+    }
+
+    /**
+     * Set photoArticle
+     *
+     * @param string $photoArticle
+     *
+     * @return Article
+     */
+    public function setPhotoArticle($photoArticle)
+    {
+        $this->photoArticle = $photoArticle;
+
+        return $this;
+    }
+
+    /**
+     * Get photoArticle
+     *
+     * @return string
+     */
+    public function getPhotoArticle()
+    {
+        return $this->photoArticle;
+    }
+}

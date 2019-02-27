@@ -1,0 +1,342 @@
+<?php
+
+namespace EvenementBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Validation\Category;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Evenement
+ *
+ * @ORM\Table(name="evenement")
+ * @ORM\Entity(repositoryClass="EvenementBundle\Repository\EvenementRepository")
+ */
+class Evenement
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    /**
+     *
+     * @ORM\Column(type="string", length=255,nullable=true)
+     */
+    public $nomImage;
+    /**
+     * @Assert\File(maxSize="5000000k")
+     */
+    public $file ;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255)
+     */
+    private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lieu", type="string", length=255)
+     */
+    private $lieu;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255)
+     */
+    private $description;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_debut", type="date")
+     */
+    private $dateDebut;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_fin", type="date")
+     */
+    private $dateFin;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nbr_place", type="integer")
+     */
+    private $nbrPlace;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="prix", type="float")
+     */
+    private $prix;
+
+
+    /**
+ * @ORM\ManyToOne(targetEntity="EvenementBundle\Entity\Categorie")
+ *@ORM\JoinColumn(name="Idcategorie",referencedColumnName="id")
+ *
+ */
+    private $idCategorie;
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     *@ORM\JoinColumn(name="IdAdmin",referencedColumnName="id")
+     *
+     */
+    private $idAdmin;
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     *
+     * @return Evenement
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getWebPath(){
+        return null===$this->nomImage ? null : $this->getUploadDir.'/'.$this->nomImage;
+    }
+    protected function getUploadRootDir(){
+        return __DIR__.'/../../../web/'.$this->getUploadDir();
+    }
+    protected function getUploadDir()
+    {
+        return 'images';
+    }
+    public function uploadProfilePicture(){
+        $this->file->move($this->getUploadRootDir(), $this->file->getClientOriginalName());
+        $this->nomImage=$this->file->getClientOriginalName();
+        $this->file=null;
+    }
+
+    /**
+     * Set nomImage
+     *
+     * @param string $nomImage
+     *
+     * @return Categorie
+     */
+    public function setNomImage($nomImage){
+        $this->nomImage==$nomImage;
+        return $this;
+    }
+
+    /**
+     * Get nomImage
+     *
+     * @return string
+     */
+    public function getNomImage(){
+        return $this->nomImage;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set lieu
+     *
+     * @param string $lieu
+     *
+     * @return Evenement
+     */
+    public function setLieu($lieu)
+    {
+        $this->lieu = $lieu;
+
+        return $this;
+    }
+
+    /**
+     * Get lieu
+     *
+     * @return string
+     */
+    public function getLieu()
+    {
+        return $this->lieu;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Evenement
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set dateDebut
+     *
+     * @param \DateTime $dateDebut
+     *
+     * @return Evenement
+     */
+    public function setDateDebut($dateDebut)
+    {
+        $this->dateDebut = $dateDebut;
+
+        return $this;
+    }
+
+    /**
+     * Get dateDebut
+     *
+     * @return \DateTime
+     */
+    public function getDateDebut()
+    {
+        return $this->dateDebut;
+    }
+
+    /**
+     * Set dateFin
+     *
+     * @param \DateTime $dateFin
+     *
+     * @return Evenement
+     */
+    public function setDateFin($dateFin)
+    {
+        $this->dateFin = $dateFin;
+
+        return $this;
+    }
+
+    /**
+     * Get dateFin
+     *
+     * @return \DateTime
+     */
+    public function getDateFin()
+    {
+        return $this->dateFin;
+    }
+
+    /**
+     * Set nbrPlace
+     *
+     * @param integer $nbrPlace
+     *
+     * @return Evenement
+     */
+    public function setNbrPlace($nbrPlace)
+    {
+        $this->nbrPlace = $nbrPlace;
+
+        return $this;
+    }
+
+
+
+    /**
+     * Get nbrPlace
+     *
+     * @return int
+     */
+    public function getNbrPlace()
+    {
+        return $this->nbrPlace;
+    }
+
+    /**
+     * Set prix
+     *
+     * @param float $prix
+     *
+     * @return Evenement
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * Get prix
+     *
+     * @return float
+     */
+    public function getPrix()
+    {
+        return $this->prix;
+    }
+
+    /**
+     * Set Categorie
+     *
+     * @param \EvenementBundle\Entity\Categorie $categorie
+     *
+     * @return Evenement
+     */
+    public function setIdCategorie(\EvenementBundle\Entity\Categorie $categorie = null)
+    {
+        $this->idCategorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * Get Categorie
+     *
+     * @return \EvenementBundle\Entity\Categorie
+     */
+    public function getIdCategorie()
+    {
+        return $this->idCategorie;
+    }
+
+
+
+
+}

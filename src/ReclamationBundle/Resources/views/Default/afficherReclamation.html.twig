@@ -1,0 +1,208 @@
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/bootstrap4/bootstrap.min.css') }}">
+    <link href="{{ asset('plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/owl.carousel.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/owl.theme.default.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/animate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/main_styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/responsive.css') }}">
+</head>
+<body>
+
+<div>
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        {#{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |#}
+        <!-- Header Content -->
+        <div class="header_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                            <div class="logo_container">
+                                <!--  <a href="#">
+                                      <div class="logo_text">Unic<span>at</span></div>
+                                  </a>-->
+                                <img src="{{ asset('images/thinklance2.png') }}" height="60" width="150">
+                            </div>
+                            <nav class="main_nav_contaner ml-auto">
+                                <ul class="main_nav">
+                                    {#<li><a href="about.html">About</a></li>
+                                    <li><a href="courses.html">Courses</a></li>
+                                    <li><a href="blog.html">Blog</a></li>
+                                    <li><a href="#">Page</a></li>
+                                    <li><a href="contact.html">Contact</a></li>#}
+                                    <li>
+                                        <a href="{{ path('fos_user_profile_show') }}">{{ app.user.username | capitalize }}</a>
+                                    </li>
+
+                                    <li class="active"><a href="{{ path('auth_homepage') }}">Accueil</a></li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reclamation</a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="{{ path('reclamation_affiche') }}" >Lister les réclamations</a>
+                                            <a class="dropdown-item" href="{{ path('reclamation_ajout') }}">effectuer une réclamation</a>
+
+                                        </div>
+                                    </li>
+                                 {#   <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Notifications</a>
+                                        <div class="dropdown-menu" style="overflow-y: scroll;scrollbar-width: thin;">
+
+
+                                            {% for r in notif %}
+
+
+                                                <div class="container" style="text-decoration-color: #721c24" >
+                                                    Reclamation de l'administrateur<br>
+                                                    {{ r.title}}<br>
+                                                    {{ r.description }}<br>
+
+
+                                                    <hr color="blue">
+                                                </div>
+                                            {% endfor %}
+
+
+                                        </div>
+                                    </li>#}
+                                    {#<li><a href="about.html">About</a>
+                                    <li><a href="courses.html">Courses</a></li>
+                                    <li><a href="blog.html">Blog</a></li>
+                                    <li><a href="#">Page</a></li>
+                                    <li><a href="contact.html">Contact</a></li>#}
+                                    <li><a href="{{ path('fos_user_security_logout') }}">
+                                            {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                        </a>
+                                    </li>
+
+                                </ul>
+                                <div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
+                                <!-- Hamburger -->
+                                <div class="hamburger menu_mm">
+                                    <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Header Content -->
+    {% else %}
+        <!-- Header Content -->
+        <div class="header_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                            <div class="logo_container">
+                                <!--  <a href="#">
+                                      <div class="logo_text">Unic<span>at</span></div>
+                                  </a>-->
+                                <img src="{{ asset('images/thinklance2.png') }}" height="60" width="150">
+                            </div>
+                            <nav class="main_nav_contaner ml-auto">
+                                <ul class="main_nav">
+
+                                    <li class="active"><a href="{{ path('auth_homepage') }}">Accueil</a></li>
+                                    {#<li><a href="about.html">About</a></li>
+                                    <li><a href="courses.html">Courses</a></li>
+                                    <li><a href="blog.html">Blog</a></li>
+                                    <li><a href="#">Page</a></li>
+                                    <li><a href="contact.html">Contact</a></li>#}
+                                    <li><a href="{{ path('fos_user_registration_register') }}" {#data-toggle="modal" #}
+                                           data-target="#exampleModalCenter2">S'inscrire</a></li>
+
+                                    <li><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                                    </li>
+                                </ul>
+                                <div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
+                                <!-- Hamburger -->
+                                <div class="hamburger menu_mm">
+                                    <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+                                </div>
+                            </nav>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Header Content -->
+    {% endif %}
+</div>
+
+<div class="container" style="margin-bottom: 21%; ">
+
+<table class="table" >
+    <thead class="thead-light">
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Sujet</th>
+        <th scope="col">Message</th>
+        <th scope="col">Date</th>
+        <th scope="col">Supprimer</th>
+
+
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for r in rec %}
+        {% if app.user==r.admin %}
+        <tr>
+            <td>{{ r.id}}</td>
+            <td>{{ r.sujet }}</td>
+            <td>{{r.message }}</td>
+            <td>{{ r.datemc|date('Y-m-d') }}</td>
+            <td><a class="btn btn-danger" href="{{ path('reclamation_supprimer',{'ref':r.id}) }}">supprimer</a></td>
+
+
+        </tr>
+    {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+
+
+<footer class="page-footer " style="background: black;margin-top: 34%;">
+
+
+    <div class="logo_container">
+        <img src="{{ asset('images/thinklance2.png') }}" height="100" width="170">
+    </div>
+
+
+</footer>
+<!-- Footer -->
+{# Call NotificationsBundles's assets #}
+{{ notifications_assets() }}
+<script>
+    /**
+     * After calling notifications_assets() "pusher" is now available
+     * and you can use it this way
+     */
+
+        // select the channel you want to listen to
+    var channel = pusher.subscribe("notifications");// notifications channel
+    channel.bind("my-event", function(data) {
+        console.log('from notifications channel', data);
+    });
+
+    var channel = pusher.subscribe("messages");// messages channel
+    channel.bind("my-event", function(data) {
+        console.log('from messages channel', data);
+    });
+</script>
+
+
+</body>
+</html>

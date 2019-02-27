@@ -1,0 +1,8 @@
+services:
+#    profile.example:
+#        class: ProfileBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+     profile.form.tag:
+         class: ProfileBundle\Form\TagType
+         arguments: ['@doctrine.orm.entity_manager']
+         tags: [form.type]

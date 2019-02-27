@@ -1,0 +1,47 @@
+article_homepage:
+    path:     /
+    defaults: { _controller: ArticleBundle:Article:index }
+
+liste_articles:
+    path:     /liste
+    defaults: { _controller: ArticleBundle:Article:listeArticles }
+
+mes_articles:
+    path:     /mes_articles
+    defaults: { _controller: ArticleBundle:Article:maListeArticles }
+
+lire_article:
+    path:     /article/{id}
+    defaults: { _controller: ArticleBundle:Article:afficherArticle }
+
+ajouter_article:
+    path:     /ajouter_article
+    defaults: { _controller: ArticleBundle:Article:ajouterArticle }
+
+modifier_article:
+    path:     /modifier_article/{id}
+    defaults: { _controller: ArticleBundle:Article:modifierArticle }
+
+supprimer_article:
+    path:     /supprimer_article/{id}
+    defaults: { _controller: ArticleBundle:Article:supprimerArticle }
+
+ajouter_type_article:
+    path:     /ajouter_type_article
+    defaults: { _controller: ArticleBundle:TypeArticle:ajouterTypeArticle }
+
+modifier_type_article:
+    path:     /modifier_type_article/{id}
+    defaults: { _controller: ArticleBundle:TypeArticle:modifierTypeArticle }
+
+supprimer_type_article:
+    path:     /supprimer_type_article/{id}
+    defaults: { _controller: ArticleBundle:TypeArticle:supprimerTypeArticle }
+
+lister_types_articles:
+    path:     /lister_types_articles
+    defaults: { _controller: ArticleBundle:TypeArticle:listerTypesArticles }
+
+search_nom_articles:
+    path:     /search_article_nom
+    defaults: { _controller: ArticleBundle:Article:rechecherArticleParNom }
