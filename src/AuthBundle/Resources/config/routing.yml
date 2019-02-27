@@ -1,3 +1,0 @@
-auth_homepage:
-    path:     /
-    defaults: { _controller: AuthBundle:Default:index }
