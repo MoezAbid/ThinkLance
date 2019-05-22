@@ -1,0 +1,133 @@
+<link rel="stylesheet" type="text/css" href="{{ asset('styles/bootstrap4/bootstrap.min.css') }}">
+<link href="{{ asset('plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet"
+      type="text/css">
+<link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/owl.carousel.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/owl.theme.default.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/animate.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('styles/main_styles.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('styles/responsive.css') }}">
+<title>Mes Paiements</title>
+
+<header class="header">
+    <!-- Header Content -->
+    <div class="header_container" style="position: fixed;">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                        <div class="logo_container">
+                            <img src="{{ asset('images/thinklance2.png') }}" height="60" width="150">
+                        </div>
+                        <nav class="main_nav_contaner ml-auto">
+                            <ul class="main_nav">
+                                <li>
+                                    <a href="{{ path('fos_user_profile_show') }}">{{ app.user.username | capitalize }}</a>
+                                </li>
+                                <li class="active"><a href="{{ path('auth_homepage') }}">Accueil</a></li>
+                                <li class="active"><a href="{{ path('liste_paiements') }}">Paiements</a></li>
+                                <li><a href="{{ path('fos_user_security_logout') }}">
+                                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                    </a>
+                                </li>
+                            </ul>
+                            {#<div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>#}
+                            <!-- Hamburger -->
+                            <div class="hamburger menu_mm">
+                                <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Header Content -->
+</header>
+<div class="courses">
+    <div class="team_background parallax-window" data-parallax="scroll"
+         data-image-src="{{ asset('images/team_background.jpg') }}" data-speed="0.8"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="section_title_container text-center">
+                    <h3 class="section_title">Mes paiements</h3>
+                    <div class="section_subtitle"><br></div>
+                </div>
+
+                <!-- Table Affichage des paiements -->
+                <center>
+                    <div class="card col-xs-12 col-md-10 hidden-xs hidden-sm text-center right-container">
+                        <div class="card-body">
+                            <div>
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Date Heure</th>
+                                        <th>Montant</th>
+                                        {#<th>Devise</th>#}
+                                        <th>Freelancer</th>
+                                        <th>Nom Projet</th>
+                                        <th>Action</th>
+                                        <th>Facture</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for pay in paiements %}
+                                        <tr>
+                                            <td>{{ pay.idPaiement }}</td>
+                                            <td>{{ pay.dateHeurePaiement | date('Y-m-d H:i:s') }}</td>
+                                            <td>{{ pay.montant }}</td>
+                                            {#<td>{{ pay.devise }}</td>#}
+                                            <td>
+                                                <a href="{{ path('user_details', {'id' : pay.freelancer.id }) }}">{{ pay.freelancer.username }}</a>
+                                            </td>
+                                            <td>
+                                                <a href="{{ path('details_projet', {'id' : pay.Projet.idprojet}) }}">{{ pay.projet.titreProjet }}</a>
+                                            </td>
+                                            <td>
+                                                {% set difference = date(pay.dateHeurePaiement).diff(date()) %}
+                                                {% set leftDays = difference.days %}
+                                                {% if  leftDays < 3 %}
+                                                    <a href="{{ path('supprimer_paiement', {'id' : pay.idPaiement}) }}">
+                                                        <button type="button" class="btn btn-warning"
+                                                                data-toggle="tooltip" data-placement="top"
+                                                                title="Annuler paiement">Rembour.
+                                                        </button>
+                                                    </a>
+                                                {% else %}
+                                                    <button type="button" class="btn btn-warning" disabled>Rembour.
+                                                    </button>
+                                                {% endif %}
+                                            </td>
+                                            <td><a target="_blank" href="{{ path('facture', {'id':pay.idPaiement}) }}">
+                                                    <button type="button" class="btn btn-success" data-toggle="tooltip"
+                                                            data-placement="top" title="Facture"><span class="fa fa-file"></span>
+                                                    </button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </center>
+                <!-- End Table Affichage des paiements -->
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+<script src="{{ asset('styles/bootstrap4/popper.js') }}"></script>
+<script src="{{ asset('styles/bootstrap4/bootstrap.min.js') }}"></script>
+<script src="{{ asset('plugins/greensock/TweenMax.min.js') }}"></script>
+<script src="{{ asset('plugins/greensock/TimelineMax.min.js') }}"></script>
+<script src="{{ asset('plugins/scrollmagic/ScrollMagic.min.js') }}"></script>
+<script src="{{ asset('plugins/greensock/animation.gsap.min.js') }}"></script>
+<script src="{{ asset('plugins/greensock/ScrollToPlugin.min.js') }}"></script>
+<script src="{{ asset('plugins/OwlCarousel2-2.2.1/owl.carousel.js') }}"></script>
+<script src="{{ asset('plugins/easing/easing.js') }}"></script>
+<script src="{{ asset('plugins/parallax-js-master/parallax.min.js') }}"></script>
+<script src="{{ asset('js/custom.js') }}"></script>

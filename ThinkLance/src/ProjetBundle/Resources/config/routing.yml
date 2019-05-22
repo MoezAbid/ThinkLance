@@ -1,0 +1,81 @@
+projet_homepage:
+    path:     /notif
+    defaults: { _controller: ProjetBundle:Default:index }
+projets:
+    path:     /projets
+    defaults: { _controller: ProjetBundle:Default:read }
+ajoutProjet:
+    path:     /ajoutprojet
+    defaults: { _controller: ProjetBundle:Default:ajout}
+details_projet:
+    path:     /details_projet/{id}
+    defaults: { _controller: ProjetBundle:Default:affiche}
+modifierProjet:
+    path:     /modifierProjet/{id}
+    defaults: { _controller: ProjetBundle:Default:modifierProjet}
+tousProjets:
+    path:     /tousProjets
+    defaults: { _controller: ProjetBundle:Default:tousProjet}
+read:
+    path:     /read
+    defaults: { _controller: ProjetBundle:Default:readd}
+supprimerProjet:
+    path:     /supprimerProjet/{id}
+    defaults: { _controller: ProjetBundle:Default:supprimerProjet}
+
+demanderProjet:
+    path:     /demanderProjet/{id}
+    defaults: { _controller: ProjetBundle:Demande:demanderProjet}
+afficheDemande:
+    path:     /afficheDemande
+    defaults: { _controller: ProjetBundle:Demande:afficheDemande}
+afficheDemandeF:
+    path:     /afficheDemandeF
+    defaults: { _controller: ProjetBundle:Demande:afficheDemandeF}
+supprimerDemande:
+    path:     /supprimerDemande/{id}
+    defaults: { _controller: ProjetBundle:Demande:supprimerDemande}
+accepterDemande:
+    path:     /accepterDemande/{id}
+    defaults: { _controller: ProjetBundle:Demande:accepterDemande}
+ajoutTache:
+    path:     /ajoutTache
+    defaults: { _controller: ProjetBundle:Tâche:ajoutTâche}
+
+modifierEtatTâche:
+    path:     /modifierEtatTâche/{id}
+    defaults: { _controller: ProjetBundle:Tâche:modifierEtatTâche}
+afficheTache:
+    path:     /afficheTache/{id}
+    defaults: { _controller: ProjetBundle:Tâche:afficheTâche}
+afficheTacheF:
+    path:     /afficheTacheF/{id}
+    defaults: { _controller: ProjetBundle:Tâche:afficheTâcheF}
+modifierTâche:
+    path:     /modifierTâche/{id}
+    defaults: { _controller: ProjetBundle:Tâche:modifierTâche}
+supprimerTâche:
+    path:     /supprimerTâche/{id}
+    defaults: { _controller: ProjetBundle:Tâche:supprimerTâche}
+index1:
+    path:     /index1
+    defaults: { _controller: ProjetBundle:Default:index1}
+
+getAllJson:
+    path:     /getAllJson
+    defaults: { _controller: ProjetBundle:Default:getAllJson}
+
+getAllCategorie:
+  path:     /getAllCategorie
+  defaults: { _controller: ProjetBundle:Categorie:getAllCategorie}
+newCategorie:
+    path:     /newCategorie
+    defaults: { _controller: ProjetBundle:Categorie:newCategorie}
+
+newDemande:
+    path:     /newDemande
+    defaults: { _controller: ProjetBundle:Demande:newDemande}
+myProject:
+    path:     /myProject/{id}
+    defaults: { _controller: ProjetBundle:Default:myProject}
+

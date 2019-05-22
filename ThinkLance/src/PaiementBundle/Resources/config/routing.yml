@@ -1,0 +1,95 @@
+paiement_homepage:
+  path:     /
+  defaults: { _controller: PaiementBundle:Default:index }
+
+liste_paiements:
+  path:     /liste/
+  defaults: { _controller: PaiementBundle:Paiement:listerPaiements }
+
+get_paiement_specifique_api:
+  path:     /get_paiement_specifique_api/{idPaiement}
+  defaults: { _controller: PaiementBundle:Paiement:getPaiemenetSpecifiqueApi }
+
+liste_paiements_employeur_api:
+  path:     /liste_employeur_api/{idUserConnecte}
+  defaults: { _controller: PaiementBundle:Paiement:listerPaiementsEmployeurApi }
+
+liste_paiements_freelaner_api:
+  path:     /liste_freelancer_api/{idUserConnecte}
+  defaults: { _controller: PaiementBundle:Paiement:listerPaiementsFreelancerApi }
+
+supprimer_paiement:
+  path:     /liste/supprimer/{id}
+  defaults: { _controller: PaiementBundle:Paiement:rembourserPaiement }
+
+supprimer_paiement_api:
+  path:     /liste_api/supprimer/{idPaiement}
+  defaults: { _controller: PaiementBundle:Paiement:rembourserPaiementApi }
+
+payer_freelancer:
+  path:     /payer/{idProjet}
+  defaults: { _controller: PaiementBundle:Paiement:payerFreelancer }
+
+payer_freelancer_api:
+  path:     /payer_api/{idProjet}
+  defaults: { _controller: PaiementBundle:Paiement:payerFreelancerApi }
+
+confirmer_paiement:
+  path:     /payer/confirmer/{idProjet}/{montant}
+  defaults: { _controller: PaiementBundle:Paiement:confirmerPayement }
+
+facture:
+  path:     /facture/{id}
+  defaults: { _controller: PaiementBundle:Paiement:pdf }
+
+facture_api:
+  path:     /facture_api/{id}
+  defaults: { _controller: PaiementBundle:Paiement:factureApi }
+
+facture_java_fx:
+  path:     /facture_java_fx/{id}
+  defaults: { _controller: PaiementBundle:Paiement:factureHtmlForPdfForDesktop }
+
+statistiques:
+  path:     /statistiques
+  defaults: { _controller: PaiementBundle:Paiement:afficherStatistiques }
+
+search_paiements_admin_id:
+  path:     /recherche/admin_id
+  defaults: { _controller: PaiementBundle:Paiement:rechecherPaiementsAdminId }
+
+search_paiements_admin_employeur:
+  path:     /recherche/admin_employeur
+  defaults: { _controller: PaiementBundle:Paiement:rechecherPaiementsAdminEmployeur }
+
+search_paiements_admin_freelancer:
+  path:     /recherche/admin_freelancer
+  defaults: { _controller: PaiementBundle:Paiement:rechecherPaiementsAdminFreelancer }
+
+search_paiements_admin_projet:
+  path:     /recherche/admin_projet
+  defaults: { _controller: PaiementBundle:Paiement:rechecherPaiementsAdminProjet }
+
+search_paiements_admin_montant:
+  path:     /recherche/admin_montant
+  defaults: { _controller: PaiementBundle:Paiement:rechecherPaiementsAdminMontant }
+
+search_paiements_admin_date:
+  path:     /recherche/admin_date
+  defaults: { _controller: PaiementBundle:Paiement:rechecherPaiementsAdminDate }
+
+search_paiements_employeur_api:
+  path: /recherche_employeur_api/{idEmployeur}/{idMotCle}
+  defaults: { _controller: PaiementBundle:Paiement:rechecherPaiementsParIdEmployeurApi }
+
+search_paiements_freelancer_api:
+  path: /recherche_freelancer_api/{idFreelancer}/{idMotCle}
+  defaults: { _controller: PaiementBundle:Paiement:rechecherPaiementsParIdFreelancerApi }
+
+get_nom_user_from_id_api:
+  path: /get_nom_user_from_id_api/{idUser}
+  defaults: { _controller: PaiementBundle:Paiement:getNomUserFromIdApi }
+
+get_nom_projet_from_id_api:
+  path: /get_nom_projet_from_id_api/{idProjet}
+  defaults: { _controller: PaiementBundle:Paiement:getNomProjetFromIdApi }

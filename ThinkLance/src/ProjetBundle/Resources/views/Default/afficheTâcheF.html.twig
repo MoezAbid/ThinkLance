@@ -1,0 +1,134 @@
+{% extends "base.html.twig" %}
+{% block header %}
+    {% block navbar %}
+
+
+        <div class="header_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                            <div class="logo_container">
+                                <!--  <a href="#">
+                                      <div class="logo_text">Unic<span>at</span></div>
+                                  </a>-->
+                                <img src="{{ asset('images/thinklance2.png') }}" height="60" width="150">
+                            </div>
+
+                            <nav class="main_nav_contaner ml-auto">
+                                <ul class="main_nav">
+                                    <li>
+                                        <a href="{{ path('fos_user_profile_show') }}">{{ app.user.username | capitalize }}</a>
+                                    </li>
+                                    <li class="active"><a href="{{ path('auth_homepage') }}">Accueil</a></li>
+                                    {#<li><a href="{{ path('Projet') }}"> Projets</a></li>#}
+                                    <li><a href="{{ path('afficheDemandeF') }}">Mes demandes</a></li>
+                                    {#<li><a href="blog.html">Blog</a></li>#}
+                                    {#<li><a href="#">Page</a></li>#}
+                                    {#<li><a href="contact.html">Contact</a></li>#}
+                                    <li><a href="{{ path('fos_user_security_logout') }}">
+                                            {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                        </a>
+                                    </li>
+                                </ul>
+                                {#<div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>#}
+                                <!-- Hamburger -->
+                                <div class="hamburger menu_mm">
+                                    <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+                                </div>
+                            </nav>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+{% endblock %}
+{% block content0 %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br><br>
+    <br>
+    <br>
+{% endblock %}
+
+{% block content %}
+
+
+    <center>
+        <h3>Liste des Tâches</h3><br><br>
+        <table border="2">
+            <tr>
+                <td>Etat d'une tâche</td>
+                <td>Description d'une tâche</td>
+            <td>Action </td>
+            </tr>
+            {% for taches in tache %}
+                <tr>
+                    <td>
+                        {{ taches.etatTache }}
+
+                            {#{% if(taches.etatTache == null) %}#}
+                                {#<input type="checkbox" id="etat" name="etat">#}
+                            {#{% else %}#}
+                                {#<input type="checkbox" id="etat" name="etat" checked>#}
+                            {#{% endif %}#}
+
+                            {#<input type="checkbox" id="etat" name="etat" onclick="{{ path('modifierEtatTâche',{'id': taches.id}) }}">#}
+
+                            {#<a href="{{ path('modifierEtatTâche',{'id': taches.id}) }}" >#}
+                                {#<input type="checkbox" id="etat" name="etat">#}
+
+                                {#{% if( taches.etatTache==null || taches.etatTache=="to do" ) %}#}
+                                {#<a href ="" class="btn btn-dark">" v" </a>#}
+                                {#{% else %}#}
+                                    {#{%  if( taches.etatTache=="done" ) %}#}
+                                    {#<a href="" class="btn btn-danger">" r"</a>#}
+                                    {#{% endif %}#}
+                                    {#{% endif %}#}
+                               {#Changé#}
+                            {#</a>#}
+
+                    </td>
+                    <td>  {{ taches.nomTache }} </td>
+
+
+
+        <td><a href ="{{ path('modifierEtatTâche',{'id': taches.id}) }}" class="btn btn-dark">Changer Etats</a></td>
+            {% endfor %}
+                </tr>
+        </table>
+        <br><br>
+
+        <script src="{{ asset('js/jquery.js') }}"></script>
+        <script>
+            // $('#etat').mouseleave(
+            //     function () {
+            //        tache.etatTache = ('#etat').valueOf();
+            //         // todo else
+            //     });
+            // $('#p').click(
+            //     function () {
+            //         if ($("#etat").is(":checked"))
+            //             $("#etat").setValues(":unchecked");
+            //         else
+            //             $("#etat").setValues(":checked");
+            //     });
+            //
+            // $("#etat").live("click", function () {
+            //     if ($(this).is(":checked"))
+            //         tache.etatTache.val("done");
+            //     else
+            //         tache.etatTache.val("to do");
+            // });
+            // $("#etat").click(
+            //     function (){$('table').hide();})
+
+        </script>
+
+    </center>
+{% endblock %}

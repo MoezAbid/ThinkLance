@@ -1,0 +1,166 @@
+{% extends "base.html.twig" %}
+{% block header %}
+    {% block navbar %}
+        <div class="header_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                            <div class="logo_container">
+                                <!--  <a href="#">
+                                      <div class="logo_text">Unic<span>at</span></div>
+                                  </a>-->
+                                <img src="{{ asset('images/thinklance2.png') }}" height="60" width="150">
+                            </div>
+
+                            <nav class="main_nav_contaner ml-auto">
+                                <ul class="main_nav">
+                                    <li>
+                                        <a href="{{ path('fos_user_profile_show') }}">{{ app.user.username | capitalize }}</a>
+                                    </li>
+                                    <li class="active"><a href="{{ path('auth_homepage') }}">Accueil</a></li>
+                                    {#<li><a href="{{ path('Projet') }}"> Projets</a></li>#}
+                                    <li><a href="{{ path('afficheDemandeF') }}">Mes demandes</a></li>
+                                    {#<li><a href="blog.html">Blog</a></li>#}
+                                    {#<li><a href="#">Page</a></li>#}
+                                    {#<li><a href="contact.html">Contact</a></li>#}
+                                    <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+                                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                            <i class="icon-bell"> <img src="{{ asset('images/notification.png') }}" height="20" width="30"></i>
+                                            <span class="badge badge-default"></span>
+                                        </a>
+                                    </li>
+                                    {#{{ render(controller('ProjetBundle:Demande:demanderProjet, { 'id': demande.projets.id}' )) }}#}
+                                    <li><a href="{{ path('fos_user_security_logout') }}">
+
+                                        </a>
+                                    </li>
+                                    <li><a href="{{ path('fos_user_security_logout') }}">
+                                            {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                        </a>
+                                    </li>
+
+                                </ul>
+                                {#<div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>#}
+                                <!-- Hamburger -->
+                                <div class="hamburger menu_mm">
+                                    <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+                                </div>
+                            </nav>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+{% endblock %}
+{% block content0 %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br><br>
+    <br>
+    <br>
+{% endblock %}
+
+
+    {% block content %}
+
+        {#<center>#}
+            {#<h3>Liste des projects</h3><br> <br> <br>#}
+
+            {#<form style="width:400px" class="input-group mb-3" action="{{ path('index1') }}" method="get">#}
+                {#<input class="form-control" name="filter" type="text" placeholder="Recherche par categorie" >#}
+                {#<div class="input-group-append">#}
+                    {#<button type="submit" class="btn btn-outline-secondary">Rechercher</button>#}
+                {#</div>#}
+            {#</form>#}
+
+            {#<br> <br> <br>#}
+            {#<table border="2" class="table table-stripd">#}
+                {#<tr><td>Titre </td>#}
+                    {#<td>Description</td>#}
+                    {#<td>nombres de jours</td>#}
+                    {#<td>Prix</td>#}
+                    {#<td>Fichiers</td>#}
+                    {#<td>Files</td>#}
+                    {#<td>Consulter les tâches demandées</td>#}
+                    {#<td>Action</td>#}
+
+                {#</tr>#}
+                {#{% for projet in projets %}#}
+                    {#<tr>#}
+                        {#<td>#}
+                            {#{{ projet.titreProjet }} </td>#}
+                        {#<td>  {{ projet.description }} </td>#}
+                        {#<td> {{ projet.nbreJours }} </td>#}
+                        {#<td> {{ projet.prix }} </td>#}
+                        {#<td> {{ projet.nomFichiers }} </td>#}
+                        {#<td> {{ projet.file }} </td>#}
+                        {#<td> <a href="{{ path('afficheTacheF',{'id': projet.idProjet}) }}"> Tâches </a> </td>#}
+                        {#<td> <a href="{{ asset('files/' ~projet.file) }}" class="btn btn-success">File</a>#}
+                            {#<a href ="{{ path('details_projet',{'id': projet.idProjet}) }}" class="btn btn-dark">Afficher</a>#}
+                            {#<a href="{{ path('demanderProjet',{'id': projet.idProjet}) }}" class="btn btn-light">demander</a>#}
+                        {#</td>#}
+
+                    {#</tr>#}
+                {#{% endfor %}#}
+            {#</table>#}
+        </center><div class="courses">
+    <div class="section_background parallax-window" data-parallax="scroll" data-image-src="{{ asset('images/courses_background.jpg') }}" data-speed="0.8"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="section_title_container text-center">
+                    <h2 class="section_title">Les projets</h2>
+
+                </div>
+                <form style="width:400px" class="input-group mb-3" action="{{ path('index1') }}" method="get">
+                    <input class="form-control" name="filter" type="text" placeholder="Recherche par categorie" >
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-outline-secondary">Rechercher</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row courses_row">
+
+            <!-- Course -->
+            {% for p in projets %}
+                <div class="col-lg-4 course_col">
+                    <div class="course">
+                        <div class="course_body">
+                            <h3 class="course_title"><a href="course.html">{{ p.titreProjet }}</a></h3>
+                            <div class="course_teacher">Durée :{{ p.nbreJours}} jours</div>
+                            <div class="course_text">
+                                <p>{{ p.description }}</p>
+                                <div class="course_price ml-auto">{{ p.prix }} DT</div>
+                                </br>
+                                <a href="{{ path('afficheTacheF',{'id': p.idProjet}) }} " class="btn btn-light"> Tâches </a>
+
+
+                            </div>
+                        </div>
+                        <div class="course_footer">
+                            <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
+                                <div class="course_info">
+
+                                    <a href="{{ asset('files/' ~p.file) }}" class="btn btn-success">File</a>
+                                    <a href ="{{ path('details_projet',{'id': p.idProjet}) }}" class="btn btn-dark">Afficher</a>
+                                    <a href="{{ path('demanderProjet',{'id': p.idProjet}) }}" class="btn btn-light">demander</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+
+        </div>
+    </div>
+</div>
+    {% endblock %}

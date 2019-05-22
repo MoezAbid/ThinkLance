@@ -1,0 +1,15 @@
+actualite_homepage:
+  path:     /
+  defaults: { _controller: ActualiteBundle:Actualite:nouveautesActualites }
+
+actualite_tech:
+  path:     /tech_api
+  defaults: { _controller: ActualiteBundle:Actualite:actuApi }
+
+actualite_prog:
+  path:     /prog_api
+  defaults: { _controller: ActualiteBundle:Actualite:progApi }
+
+actualite_free:
+  path:     /free_api
+  defaults: { _controller: ActualiteBundle:Actualite:freeApi }

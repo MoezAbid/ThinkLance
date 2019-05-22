@@ -1,0 +1,42 @@
+qand_a_mobile_homepage:
+    path:     /
+    defaults: { _controller: QandAMobileBundle:Default:index }
+app_user:
+    path:     /appuser
+    defaults: { _controller: QandAMobileBundle:Default:appUser }
+
+add_question:
+    path:     /qpost
+    defaults: { _controller: QandAMobileBundle:Default:postQuestion }
+delete_question:
+    path:     /qdelete
+    defaults: { _controller: QandAMobileBundle:Default:deleteQuestion }
+update_question:
+    path:     /qupdate
+    defaults: { _controller: QandAMobileBundle:Default:updateQuestion }
+
+all_question:
+    path:     /all
+    defaults: { _controller: QandAMobileBundle:Default:allQuestions }
+
+question_replies:
+    path:     /replies
+    defaults: { _controller: QandAMobileBundle:Default:questionReplies }
+
+
+
+add_reply:
+    path:     /rpost
+    defaults: { _controller: QandAMobileBundle:Default:replyQuestion }
+
+
+reply_upvote:
+    path:     /upvote
+    defaults: { _controller: QandAMobileBundle:Default:upVote }
+
+reply_downvote:
+    path:     /downvote
+    defaults: { _controller: QandAMobileBundle:Default:downVote }
+reply_satisfy:
+    path:     /satisfied
+    defaults: { _controller: QandAMobileBundle:Default:satisfiedReply }

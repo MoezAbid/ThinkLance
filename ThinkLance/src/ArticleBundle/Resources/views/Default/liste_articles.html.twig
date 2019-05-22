@@ -1,0 +1,122 @@
+<link rel="stylesheet" type="text/css" href="{{ asset('styles/bootstrap4/bootstrap.min.css') }}">
+<link href="{{ asset('plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet"
+      type="text/css">
+<link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/owl.carousel.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/owl.theme.default.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/animate.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('styles/main_styles.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('styles/responsive.css') }}">
+<title>Articles récents</title>
+
+<header class="header">
+    <!-- Header Content -->
+    <div class="header_container" style="position: fixed;">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                        <div class="logo_container">
+                            <img src="{{ asset('images/thinklance2.png') }}" height="60" width="150">
+                        </div>
+                        <nav class="main_nav_contaner ml-auto">
+                            <ul class="main_nav">
+                                <li>
+                                    <a href="{{ path('fos_user_profile_show') }}">{{ app.user.username | capitalize }}</a>
+                                </li>
+                                <li class="active"><a href="{{ path('auth_homepage') }}">Accueil</a></li>
+                                <li class="active"><a href="{{ path('liste_paiements') }}">Paiements</a></li>
+                                <li><a href="{{ path('fos_user_security_logout') }}">
+                                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                    </a>
+                                </li>
+                            </ul>
+                            {#<div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>#}
+                            <!-- Hamburger -->
+                            <div class="hamburger menu_mm">
+                                <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Header Content -->
+</header>
+<body>
+<div class="team_background parallax-window" data-parallax="scroll"
+     data-image-src="{{ asset('images/team_background.jpg') }}" data-speed="0.8"></div>
+<div class="courses">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <!-- Table Affichage des articles -->
+                <div class="card col-xs-12 col-md-12 hidden-xs hidden-sm">
+                    <div class="card-body">
+                        <div class="section_title_container text-center">
+                            <h3 class="section_title">Articles</h3>
+                            <div class="section_subtitle"><br><a href="{{ path('ajouter_article') }}" role="button"
+                                                                 class="btn btn-outline-success"><span
+                                            class="fa fa-plus fa-lg" aria-hidden="true"></span> Ajouter</a>&nbsp;
+                            </div>
+                            <div class="section_subtitle"><br></div>
+                        </div>
+                        <ul class="list-unstyled">
+                            {% for art in articles %}
+                                <br>
+                                <div class="media">
+                                    {% if art.photoArticle == null %}
+                                        <img src="{{ asset('uploads/articlesPhotos/ImageArticlePlaceHolder.png') }}"
+                                             class="align-self-start mr-3"
+                                             alt="..."
+                                             style="width: 20em;">
+                                    {% else %}
+                                        <img src="{{ asset('uploads/articlesPhotos/' ~ art.photoArticle) }}"
+                                             class="align-self-start mr-3"
+                                             alt="..."
+                                             style="width: 20em;">
+                                    {% endif %}
+                                    <div class="media-body">
+                                        <h5 class="mt-0"><a
+                                                    href="{{ path('lire_article', {'id':art.id}) }}">{{ art.titre }}</a>
+                                        </h5>
+                                        {% if art.type != null %}
+                                            <p>{{ art.dateHeure | date('Y-m-d H:i') }} <span class="badge badge-pill badge-primary">{{ art.type.nom }}</span></p>
+                                        {% else %}
+                                            <p>{{ art.dateHeure | date('Y-m-d H:i') }}</p>
+                                        {% endif %}
+                                        <p>{{ art.description }}</p>
+                                    </div>
+                                    {% if art.utilisateur.id == app.user.id  %}
+                                    <a href="{{ path('modifier_article', {'id':art.id}) }}" role="button"
+                                       class="btn btn-outline-info"><span
+                                                class="fa fa-edit fa-lg" aria-hidden="true"></span>Modifier</a>&nbsp;
+                                    <a href="{{ path('supprimer_article', {'id':art.id}) }}" role="button"
+                                       class="btn btn-outline-danger"><span
+                                                class="fa fa-trash-o fa-lg" aria-hidden="true"></span> Supprimer</a>
+                                    {% endif %}
+                                </div>
+                                <br>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- End Table Affichage des articles -->
+        </div>
+    </div>
+</div>
+</div>
+</body>
+<script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+<script src="{{ asset('styles/bootstrap4/popper.js') }}"></script>
+<script src="{{ asset('styles/bootstrap4/bootstrap.min.js') }}"></script>
+<script src="{{ asset('plugins/greensock/TweenMax.min.js') }}"></script>
+<script src="{{ asset('plugins/greensock/TimelineMax.min.js') }}"></script>
+<script src="{{ asset('plugins/scrollmagic/ScrollMagic.min.js') }}"></script>
+<script src="{{ asset('plugins/greensock/animation.gsap.min.js') }}"></script>
+<script src="{{ asset('plugins/greensock/ScrollToPlugin.min.js') }}"></script>
+<script src="{{ asset('plugins/OwlCarousel2-2.2.1/owl.carousel.js') }}"></script>
+<script src="{{ asset('plugins/easing/easing.js') }}"></script>
+<script src="{{ asset('plugins/parallax-js-master/parallax.min.js') }}"></script>
+<script src="{{ asset('js/custom.js') }}"></script>

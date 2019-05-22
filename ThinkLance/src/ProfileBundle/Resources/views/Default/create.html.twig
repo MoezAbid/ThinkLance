@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="CreativeLayers">
+
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('lol/css/bootstrap-grid.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('lol/css/icons.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('lol/css/animate.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('lol/css/style.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('lol/css/responsive.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('lol/css/chosen.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('lol/css/colors/colors.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('lol/css/bootstrap.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('lol/lol/css/font-awesome.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/bootstrap4/bootstrap.min.css') }}">
+    <link href="{{ asset('plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/owl.carousel.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/owl.theme.default.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/animate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/main_styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/responsive.css') }}">
+
+</head>
+<body>
+
+
+<header class="header">
+    <div class="top_bar bg-white">
+        <div class="top_bar_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="top_bar_content d-flex flex-row align-items-center justify-content-start">
+                            <ul class="top_bar_contact_list">
+
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% block header %}
+
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        {% if (is_granted('ROLE_FREELANCER')) %}
+            <header class="stick-top bg-white">
+                <div class="menu-sec">
+                    <div class="container">
+                        <div class="res-logo">
+                            <a href="index.html" title=""><img src="{{ asset('images/thinklance2.png') }}"
+                                                               height="60" width="90" alt=""/></a>
+                        </div><!-- Logo -->
+                        <div class="btns-profiles-sec">
+                                    <span><img src="{{ asset('images1/') }}{{ app.user.nomImage }}" height="50px"
+                                               width="50px" alt=""/>  <a
+                                                style="color: black;font-family:'Roboto Slab';font-weight: bold;font-size: 15px">{{ app.user.username | capitalize }} {{ app.user.firstname | capitalize }}</a> <i
+                                                class="la la-angle-down"
+                                                style="color: black;font-size: 20px"></i></span>
+
+                            <ul>
+
+                                <li><a href="#" title=""><i class="la la-user"></i>Mon Profil</a></li>
+
+                                <li><a href="{{ path('fos_user_security_logout') }}">
+                                        <i class="la la-history"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <div style="padding: 20px;border-top: 1px solid #e8ecec">
+
+                                        <p>Envie de travailler?</p>
+                                        <a href="{{ path('create_profile_page') }}" title=""> Créer mon profil
+                                            Freelance</a>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </div>
+
+                        <div class="wishlist-dropsec">
+                            <span><i class="la la-bell" style="color: black;font-size: 30px"></i></span>
+                            <div class="wishlist-dropdown">
+                                <ul class="scrollbar">
+                                    {{ render(controller('ProfileBundle:Default:displayNotification')) }}
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        <nav class="main_nav_contaner ml-auto">
+                            <ul class="main_nav">
+
+                                <li class="menu-item-has-children">
+                                    <a href="#" title="" style="color:black">Mes Participations</a>
+                                    <ul>
+                                        <li><a class="dropdown-item" href="{{ path('read_even') }}">Lister
+                                                les evenements</a></li>
+
+                                    </ul>
+                                </li>
+                                <li class="menu-item-has-children">
+
+                                    <a href="#" title="" style="color:black">Communication</a>
+                                    <ul>
+                                        <li><a href="{{ path('liste_articles') }}" title="">Liste des articles</a></li>
+                                        <li><a href="{{ path('mes_articles') }}" title="">Mes Articles</a></li>
+                                        <li><a href="{{ path('actualite_homepage') }}" title="">Actualités</a></li>
+                                        <li><a href="{{ path('forum_homepage') }}" title="">Forum</a></li>
+                                        <li><a href="{{ path('fos_message_inbox') }}" title="">Messagerie</a></li>
+
+                                    </ul>
+                                </li>
+                                {#   <li> <a>Messagerie</a> </li>#}
+                                <li></li>
+                                <li class="menu-item-has-children">
+
+                                    <a href="#" title="" style="color:black">Paiements</a>
+                                    <ul>
+                                        <li><a href="{{ path('liste_paiements') }}" title="">Mes paiements</a></li>
+                                        <li><a href="{{ path('statistiques') }}" title="">Statistiques</a></li>
+
+                                    </ul>
+                                </li>
+                                <li class="menu-item-has-children">
+
+                                    <a href="#" title="" style="color:black">Mes Réclamations</a>
+                                    <ul>
+
+                                        <li><a class="dropdown-item" href="{{ path('reclamation_affiche') }}">Lister
+                                                les réclamations</a></li>
+                                        <li><a class="dropdown-item" href="{{ path('reclamation_ajout') }}">effectuer
+                                                une réclamation</a></li>
+
+                                    </ul>
+                                </li>
+
+
+                            </ul>
+
+                            <!-- Hamburger -->
+                            <div class="hamburger menu_mm">
+                                <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+                            </div>
+                        </nav>
+
+
+                        <!-- Menus -->
+                    </div>
+                </div>
+            </header>
+        {% else %}
+            <!-- User Employeur-->
+
+            <header class="stick-top bg-white">
+                <div class="menu-sec">
+                    <div class="container">
+                        <div class="res-logo">
+                            <a href="index.html" title=""><img src="{{ asset('images/thinklance2.png') }}"
+                                                               height="60" width="120" alt=""/></a>
+                        </div><!-- Logo -->
+                        <div class="btns-profiles-sec">
+                                    <span><img src="{{ asset('images1/') }}{{ app.user.nomImage }}" height="50px"
+                                               width="50px" alt=""/>  <a
+                                                style="color: black;font-family:'Roboto Slab';font-weight: bold;font-size: 15px">{{ app.user.username | capitalize }} {{ app.user.firstname | capitalize }}</a> <i
+                                                class="la la-angle-down"
+                                                style="color: black;font-size: 20px"></i></span>
+
+                            <ul>
+
+                                <li><a href="#" title=""><i class="la la-user"></i>Mon Profil</a></li>
+
+                                <li><a href="{{ path('fos_user_security_logout') }}">
+                                        <i class="la la-history"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <div style="padding: 20px;border-top: 1px solid #e8ecec">
+
+                                        <p>Envie de travailler?</p>
+                                        <a href="{{ path('employeur_create_profile') }}" title=""> Créer mon profil
+                                            Employeur</a>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </div>
+
+                        <div class="wishlist-dropsec">
+                            <span><i class="la la-bell" style="color: black;font-size: 30px"></i></span>
+                            <div class="wishlist-dropdown">
+                                <ul class="scrollbar">
+                                    {# {{ render(controller('ProjetBundle:Demande:demanderProjet')) }}#}
+
+                                </ul>
+                            </div>
+                        </div>
+                        <nav class="main_nav_contaner ml-auto">
+                            <ul class="main_nav">
+
+                                <li class="menu-item-has-children">
+                                    <a href="#" title="" style="color:black">Mes Participations</a>
+                                    <ul>
+                                        <li><a class="dropdown-item" href="{{ path('read_even') }}">Lister
+                                                les evenements</a></li>
+
+                                    </ul>
+                                </li>
+                                <li class="menu-item-has-children">
+
+                                    <a href="#" title="" style="color:black">Communication</a>
+                                    <ul>
+                                        <li><a href="{{ path('liste_articles') }}" title="">Liste des articles</a></li>
+                                        <li><a href="{{ path('mes_articles') }}" title="">Mes Articles</a></li>
+                                        <li><a href="{{ path('actualite_homepage') }}" title="">Actualités</a></li>
+                                        <li><a href="{{ path('forum_homepage') }}" title="">Forum</a></li>
+                                        <li><a href="{{ path('fos_message_inbox') }}" title="">Messagerie</a></li>
+
+                                    </ul>
+                                </li>
+                                {#   <li> <a>Messagerie</a> </li>#}
+                                <li></li>
+                                <li class="menu-item-has-children">
+
+                                    <a href="#" title="" style="color:black">Paiements</a>
+                                    <ul>
+                                        <li><a href="{{ path('liste_paiements') }}" title="">Mes paiements</a></li>
+                                        <li><a href="{{ path('statistiques') }}" title="">Statistiques</a></li>
+
+                                    </ul>
+                                </li>
+                                <li class="menu-item-has-children">
+
+                                    <a href="#" title="" style="color:black">Mes Réclamations</a>
+                                    <ul>
+
+                                        <li><a class="dropdown-item" href="{{ path('reclamation_affiche') }}">Lister
+                                                les réclamations</a></li>
+                                        <li><a class="dropdown-item" href="{{ path('reclamation_ajout') }}">effectuer
+                                                une réclamation</a></li>
+
+                                    </ul>
+                                </li>
+
+
+                            </ul>
+
+                            <!-- Hamburger -->
+                            <div class="hamburger menu_mm">
+                                <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+                            </div>
+                        </nav>
+
+
+                        <!-- Menus -->
+                    </div>
+                </div>
+            </header>
+
+
+        {% endif %}
+    {% else %}
+        <!-- Header Content -->
+        <div class="header_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                            <div class="logo_container">
+                                <!--  <a href="#">
+                                      <div class="logo_text">Unic<span>at</span></div>
+                                  </a>-->
+                                <img src="{{ asset('images/thinklance2.png') }}" height="60" width="90">
+                            </div>
+                            <nav class="main_nav_contaner ml-auto">
+                                <ul class="main_nav">
+                                    <li class="active"><a href="{{ path('auth_homepage') }}">Accueil</a></li>
+                                    {#<li><a href="about.html">About</a></li>
+                                    <li><a href="courses.html">Courses</a></li>
+                                    <li><a href="blog.html">Blog</a></li>
+                                    <li><a href="#">Page</a></li>
+                                    <li><a href="contact.html">Contact</a></li>#}
+                                    <li>
+                                        <a href="{{ path('fos_user_registration_register') }}" {#data-toggle="modal" #}
+                                           data-target="#exampleModalCenter2">S'inscrire</a></li>
+
+                                    <li>
+                                        <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                                    </li>
+                                </ul>
+                                <div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
+                                <!-- Hamburger -->
+                                <div class="hamburger menu_mm">
+                                    <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+                                </div>
+                            </nav>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Header Content -->
+    {% endif %}
+
+
+    <div class="responsive-header">
+        <div class="responsive-menubar">
+            <div class="res-logo"><a href="index.html" title=""><img
+                            src="{{ asset('images/resource/logo.png') }}" alt=""/></a></div>
+            <div class="menu-resaction">
+                <div class="res-openmenu">
+                    <img src="{{ asset('images/icon.png') }}" alt=""/> Menu
+                </div>
+                <div class="res-closemenu">
+                    <img src="{{ asset('images/icon2.png') }}" alt=""/> Close
+                </div>
+            </div>
+        </div>
+        <div class="responsive-opensec">
+            <div class="btn-extars">
+                <a href="#" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
+                <ul class="account-btns">
+                    <li class="signup-popup"><a title=""><i class="la la-key"></i> Sign Up</a></li>
+                    <li class="signin-popup"><a title=""><i class="la la-external-link-square"></i> Login</a>
+                    </li>
+                </ul>
+            </div><!-- Btn Extras -->
+            <form class="res-search">
+                <input type="text" placeholder="Job title, keywords or company name"/>
+                <button type="submit"><i class="la la-search"></i></button>
+            </form>
+            <div class="responsivemenu">
+                <ul>
+                    <li class="menu-item-has-children">
+                        <a href="#" title="">Home</a>
+                        <ul>
+                            <li><a href="index.html" title="">Home Layout 1</a></li>
+                            <li><a href="index2.html" title="">Home Layout 2</a></li>
+                            <li><a href="index3.html" title="">Home Layout 3</a></li>
+                            <li><a href="index4.html" title="">Home Layout 4</a></li>
+                            <li><a href="index5.html" title="">Home Layout 5</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+<section class="overlape">
+    <div class="block no-padding">
+        <div data-velocity="-.1"
+             style="background: url({{ asset('lol/images/resource/mslider1.jpg') }}) repeat scroll 50% 422.28px transparent;"
+             class="parallax scrolly-invisible no-parallax"></div>
+        <div class="container fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="inner-header" style="background-color: #14bdee">
+                        <h3>Bienvenue {{ app.user.username }} {{ app.user.firstname }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="block no-padding">
+        <div class="container">
+            <div class="row no-gape">
+                <aside class="col-lg-3 column border-right">
+
+                    <div class="widget">
+                        <div class="tree_widget-sec">
+                            <ul>
+                                <li>
+                                    <a href="#profil" title=""><i class="la la-user"></i>Mon Profil Freelancer</a>
+
+                                </li>
+                                <li>
+                                    <a href="#formation" title=""><i class="la la-briefcase"></i>Formations</a>
+
+                                </li>
+                                <li>
+                                    <a href="#experience" title=""><i class="la la-file-text"></i>Expériences
+                                        Profésionnelles</a>
+
+                                </li>
+                                <li>
+                                    <a href="#portfolio" title=""><i class="la  la-file-photo-o"></i>PorteFolio</a>
+
+                                </li>
+                                <li>
+                                    <a href="#langue" title=""><i class="la la-language"></i>Langue</a>
+
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="emply-btns ">
+                        <a href="{{ path('visualiser_profile_page') }}" title=""><i class="la la-user"></i>Visualiser
+                            mon profil</a>
+
+                    </div>
+                </aside>
+                <div class="col-lg-9 column">
+
+                    <div class="padding-left">
+                        <div class="profile-title"></div>
+                            <h3>Mon Profil</h3>
+                            <div class="resumeadd-form">
+
+                                {% if not form.vars.valid %}
+                                <div class="alert alert-danger" role="alert">
+                                   <strong ><p style="color: darkred">Erreur</p></strong> <span  style="font-weight: bold;color: red">{{ form_errors(form) }}</span>
+                                </div>
+
+                                {% endif %}
+                            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+                            <div class="upload-img-bar">
+                                <span class="round"><img src="{{ asset('images1/') }}{{ user.nomImage }}"
+                                                         alt=""/></span>
+                                <div class="upload-info">
+                                    {{ form_widget(form.file) }}
+
+                                </div>
+
+                            </div>
+                            {#  <button type="submit">Modifier Photo de profil</button>#}
+
+                                <div class="profile-form-edit" id="profil">
+                                    <div class="row">
+
+                                        <div class="col-lg-6">
+                                            <span class="pf-title">Titre Profil</span>
+                                            <div class="pf-field">
+
+                                                    {{ form_widget(form.titreProfile) }}
+
+                                            </div>
+
+                                        </div>
+
+
+
+                                        <div class="col-lg-6">
+                                            <span class="pf-title">Pays</span>
+                                            <div class="pf-field">
+                                                {{ form_widget(form.pays, {'attr': {'class': 'typeahead1','style':'border: 2px solid #e8ecec;   border-radius: 8px;'}}) }}
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <span class="pf-title">Ville</span>
+
+                                            <div class="pf-field" >
+
+
+                                                {{ form_widget(form.ville, {'attr': {'class': 'typeahead','style':'border: 2px solid #e8ecec;   border-radius: 8px;'}}) }}
+
+
+                                            </div>
+
+
+                                        </div>
+
+
+                                        <div class="col-lg-3">
+                                            <span class="pf-title">Tarif Moyen/Jour</span>
+                                            <div class="pf-field">
+                                                {{ form_widget(form.tarifMoyen) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <span class="pf-title">Description</span>
+                                            <div class="pf-field">
+                                                {{ form_widget(form.description) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <button type="submit">Enregistrer</button>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+
+
+                    </div>
+                                {{ form_end(form) }}
+                                <form method="get">
+                                    <div class="border-title"><h3>Catégories</h3><br><br>
+                                        <div class="resumeadd-form">
+                                            <div class="row no-gape">
+                                                <div class="cat-sec">
+                                                    <div class="row no-gape">
+                                                        <div class="col-lg-4 col-md-4 " id="clickme">
+                                                            <div class="p-category">
+                                                                <a title="">
+                                                                    <i class="la la-code-fork"></i>
+                                                                    <span id="cat" name="cat">Développeurs, Intégrateurs & Data scientists</span>
+
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-4 " id="clickme2">
+                                                            <div class="p-category ">
+                                                                <a title="">
+                                                                    <i class="la la-camera"></i>
+                                                                    <span id="cat" name="cat">Motion  Designers  et  Réalisateurs </span>
+
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-4 " id="clickme3">
+                                                            <div class="p-category">
+                                                                <a title="">
+                                                                    <i class="la la-commenting-o "></i>
+                                                                    <span id="cat" name="cat">Rédacteurs, Traducteurs, Community Managers…</span>
+
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row no-gape">
+                                                <div class="cat-sec">
+                                                    <div class="row no-gape">
+                                                        <div class="col-lg-4 col-md-4 col-sm-12" id="clickme4">
+                                                            <div class="p-category">
+                                                                <a title="">
+                                                                    <i class="la la-paint-brush"></i>
+                                                                    <span id="cat" name="cat">Graphistes, Designers, Photographes…</span>
+
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-4 col-sm-12" id="clickme5">
+                                                            <div class="p-category">
+                                                                <a title="">
+                                                                    <i class="la la-calendar-minus-o"></i>
+                                                                    <span id="cat"
+                                                                          name="cat">Chefs de Projet & Coachs Agile</span>
+
+                                                                </a>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-4 col-md-4 col-sm-12" id="clickme6">
+                                                            <div class="p-category">
+                                                                <a title="">
+                                                                    <i class="la la-university"></i>
+                                                                    <span id="cat" name="cat">Consultants en Stratégie, Progiciel, Communication</span>
+
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <section style="display: none" id="toppp">
+                                                <div class="widget ">
+                                                    <h3 class="sb-title open"><p></p>Sous Categorie Développeurs,
+                                                        Intégrateurs & Data scientists
+                                                    </h3>
+                                                    <div class="specialism_widget">
+                                                        <div class="simple-checkbox">
+                                                            <p><input type="checkbox" value="Développeur Back-End"
+                                                                      name="souscat" id="22"><label for="22">Développeur
+                                                                    Back-End</label></p>
+                                                            <p><input type="checkbox" value="Data Scientist"
+                                                                      name="souscat"
+                                                                      id="23"><label for="23">Data Scientist</label></p>
+                                                            <p><input type="checkbox"
+                                                                      value="Développeur Front-End / Intégrateur Web"
+                                                                      name="souscat" id="24"><label for="24">Développeur
+                                                                    Front-End / Intégrateur Web</label></p>
+                                                            <p><input type="checkbox" value="Développeur Mobile"
+                                                                      name="souscat" id="25"><label for="25">Développeur
+                                                                    Mobile</label></p>
+                                                            <p><input type="checkbox" value="Webmaster" name="souscat"
+                                                                      id="26"><label for="26">Webmaster</label></p>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                            <section style="display: none" id="top2">
+                                                <div class="widget">
+                                                    <h3 class="sb-title open"><p></p>Sous Categorie Motion Designers &
+                                                        Réalisateurs
+                                                    </h3>
+                                                    <div class="specialism_widget">
+                                                        <div class="simple-checkbox">
+                                                            <p><input type="checkbox" value="Réalisateur" name="souscat"
+                                                                      id="27"><label for="27">Réalisateur </label></p>
+                                                            <p><input type="checkbox" value="Game Designer"
+                                                                      name="souscat"
+                                                                      id="28"><label for="28">Game Designer </label></p>
+                                                            <p><input type="checkbox" value="Motion Designer"
+                                                                      name="souscat"
+                                                                      id="29"><label for="29">Motion Designer</label>
+                                                            </p>
+                                                            <p><input type="checkbox" value="Sound Designer"
+                                                                      name="souscat"
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                            <section style="display: none" id="top3">
+                                                <div class="widget">
+                                                    <h3 class="sb-title open"><p></p>Sous Categorie Rédacteurs,
+                                                        Traducteurs,
+                                                        Community Managers
+                                                    </h3>
+                                                    <div class="specialism_widget">
+                                                        <div class="simple-checkbox">
+                                                            <p><input type="checkbox" value="Community Manager"
+                                                                      name="souscat" id="31"><label for="31">Community
+                                                                    Manager </label></p>
+                                                            <p><input type="checkbox" value="Pigiste" name="souscat"
+                                                                      id="34"><label for="34">Pigiste </label></p>
+
+                                                            <p><input type="checkbox" value="Traducteur" name="souscat"
+                                                                      id="36"><label for="36">Traducteur </label></p>
+                                                            <p><input type="checkbox" value="Rédacteur Web"
+                                                                      name="souscat"
+                                                                      id="37"><label for="37">Rédacteur Web</label></p>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+
+                                            <section style="display: none" id="top4">
+                                                <div class="widget ">
+                                                    <h3 class="sb-title open"><p></p>Sous Categorie Graphistes,
+                                                        Designers,
+                                                        Photographes
+                                                    </h3>
+                                                    <div class="specialism_widget">
+                                                        <div class="simple-checkbox">
+                                                            <p><input type="checkbox" value="Graphiste" name="souscat"
+                                                                      id="38"><label for="38">Graphiste</label></p>
+                                                            <p><input type="checkbox" value="Illustrateur"
+                                                                      name="souscat"
+                                                                      id="39"><label for="39">Illustrateur </label></p>
+                                                            <p><input type="checkbox" value="Photographe" name="souscat"
+                                                                      id="40"><label for="40">Photographe </label></p>
+                                                            <p><input type="checkbox" value="UX Designer "
+                                                                      name="souscat"
+                                                                      id="41"><label for="41">UX Designer </label></p>
+                                                            <p><input type="checkbox" value="Webdesigner" name="souscat"
+                                                                          id="42"><label for="42">Webdesigner </label></p>
+                                                            <p><input type="checkbox" value="Directeur artistique"
+                                                                      name="souscat" id="43"><label for="43">Directeur
+                                                                    artistique</label></p>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                            <section style="display: none" id="top5">
+                                                <div class="widget ">
+                                                    <h3 class="sb-title open"><p></p>Sous Categorie Chefs de Projet &
+                                                        Coachs
+                                                        Agile
+                                                    </h3>
+                                                    <div class="specialism_widget">
+                                                        <div class="simple-checkbox">
+                                                            <p><input type="checkbox" value="Coach Agile "
+                                                                      name="souscat"
+                                                                      id="44"><label for="44">Coach Agile </label></p>
+                                                            <p><input type="checkbox" value="Product Manager"
+                                                                      name="souscat"
+                                                                      id="45"><label for="45">Product Manager </label>
+                                                            </p>
+                                                            <p><input type="checkbox" value="Chef de Projet "
+                                                                      name="souscat"
+                                                                      id="46"><label for="46">Chef de Projet </label>
+                                                            </p>
+                                                            <p><input type="checkbox" value="Scrum Master"
+                                                                      name="souscat"
+                                                                      id="47"><label for="47">Scrum Master</label></p>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                            <section style="display: none" id="top6">
+                                                <div class="widget ">
+                                                    <h3 class="sb-title open"><p></p>Sous Categorie Consultants en
+                                                        Stratégie, Progiciel, Communication
+                                                    </h3>
+                                                    <div class="specialism_widget">
+                                                        <div class="simple-checkbox">
+                                                            <p><input type="checkbox" value="Business Developer"
+                                                                      name="souscat" id="48"><label for="48">Business
+                                                                    Developer </label></p>
+                                                            <p><input type="checkbox"
+                                                                      value="Consultant en Communication"
+                                                                      name="souscat" id="49"><label for="49">Consultant
+                                                                    en
+                                                                    Communication </label></p>
+                                                            <p><input type="checkbox" value="Consultant en Stratégie"
+                                                                      name="souscat" id="50"><label for="50">Consultant
+                                                                    en
+                                                                    Stratégie </label></p>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </section>
+                                            <div class="col-lg-12">
+                                                <button type="submit">Enregistrer</button>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+                                </form>
+                                {{ form_start(form3) }}
+
+                                <div class="border-title"><h3>Compétences</h3></div>
+                                <div class="resumeadd-form">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+
+                                            <div class="pf-field no-margin">
+                                                <ul class="tags">
+
+                                                    <li>{{ form_widget(form3.tags, {'attr': {'class': 'addedTag' }}) }}</li>
+
+                                                </ul>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <button type="submit">Enregistrer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                {{ form_end(form3) }}
+
+                    <div class="border-title" id="formation"><h3>Formations</h3>
+
+                        {{ form_start(formformation, {'attr': {'novalidate': 'novalidate'}}) }}
+                        <div class="resumeadd-form">
+                            {% if not formformation.vars.valid %}
+                                <div class="alert alert-danger" role="alert">
+                                    <strong ><p style="color: darkred">Erreur</p></strong> <span  style="font-weight: bold;color: red">{{ form_errors(formformation) }}</span>
+                                </div>
+                            {% endif %}
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <span class="pf-title">Titre</span>
+                                    <div class="pf-field">
+                                        {{ form_widget(formformation.titre) }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <span class="pf-title">Du</span>
+                                    <div class="pf-field">
+                                        {{ form_widget(formformation.dateDebut) }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <span class="pf-title">Au</span>
+                                    <div class="pf-field">
+                                        {{ form_widget(formformation.dateFin) }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <span class="pf-title">Institution</span>
+                                    <div class="pf-field">
+                                        {{ form_widget(formformation.institution) }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <span class="pf-title">Description</span>
+                                    <div class="pf-field">
+                                        {{ form_widget(formformation.description) }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <button type="submit">Enregistrer</button>
+                                </div>
+                            </div>
+                        </div>
+                        {{ form_end(formformation) }}
+                        {{ form_start(formexp, {'attr': {'novalidate': 'novalidate'}}) }}
+                        <div class="border-title" id="experience"><h3>Expériences Professionnelles</h3>
+                            <div class="resumeadd-form">
+                                {% if not formexp.vars.valid %}
+                                    <div class="alert alert-danger" role="alert">
+                                        <strong ><p style="color: darkred">Erreur</p></strong> <span  style="font-weight: bold;color: red">{{ form_errors(formexp) }}</span>
+                                    </div>
+                                {% endif %}
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <span class="pf-title">Titre</span>
+                                        <div class="pf-field">
+                                            {{ form_widget(formexp.titreExp) }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <span class="pf-title">Du</span>
+                                        <div class="pf-field">
+                                            {{ form_widget(formexp.dateDebut) }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <span class="pf-title">Au</span>
+                                        <div class="pf-field">
+                                            {{ form_widget(formexp.dateFin) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <span class="pf-title">Entreprise</span>
+                                        <div class="pf-field">
+                                            {{ form_widget(formexp.entreprise) }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <span class="pf-title">Description</span>
+                                        <div class="pf-field">
+                                            {{ form_widget(formexp.description) }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <button type="submit">Enregistrer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{ form_end(formexp) }}
+                        <div class="border-title" id="portfolio"><h3>Portfolio</h3>
+                            <div class="resumeadd-form">
+                                <div class="row">
+
+                                    <div class="col-lg-12">
+                                        <div class="upload-portfolio">
+                                            <div class="uploadbox">
+
+
+                                                <img src="{{ asset('images1/') }}{{ portfolio.nomImage }}"
+                                                     style="height: 150px;width: 200px" alt=""/>
+                                                <input id="file-upload" type="file" style="display: none;"/>
+
+                                            </div>
+                                            {{ form_start(form2) }}
+                                            {{ form_widget(form2.file,  { 'attr': {'class': 'upload-portfolio'} }) }}
+                                            <button type="submit">Enregistrer</button>
+
+                                            {{ form_end(form2) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border-title" id="langue"><h3>Langues</h3>
+                                <form method="get">
+                                    <div class="resumeadd-form">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <span class="pf-title">Ajouter une langue</span>
+
+                                                <select data-placeholder="Allow In Search" id="langue" name="langue"
+                                                               class="chosen">
+                                                           <option>Anglais</option>
+                                                           <option>Français</option>
+                                                           <option>Arabe </option>
+                                                           <option>Allemand</option>
+                                                           <option>Italien</option>
+                                                           <option>Espagnol</option>
+                                                        </select>
+                                            </div>
+
+
+                                            <div class="col-lg-12">
+                                                <button type="submit">Enregistrer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+
+</section>
+
+</div>
+
+
+<script data-cfasync="false"
+        src="{{ asset('lol/../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js') }}"></script>
+<script src="{{ asset('lol/js/jquery.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('lol/js/modernizr.js') }}" type="text/javascript"></script>
+<script src="{{ asset('lol/js/script.js') }}" type="text/javascript"></script>
+<script src="{{ asset('lol/js/bootstrap.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('lol/js/wow.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('lol/js/slick.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('lol/js/parallax.js') }}" type="text/javascript"></script>
+<script src="{{ asset('lol/js/select-chosen.js') }}" type="text/javascript"></script>
+<script src="{{ asset('lol/js/jquery.scrollbar.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/typeahead.jquery.js') }}" type="text/javascript"></script>
+<link rel="stylesheet" href="{{ asset('public/css/tags-input.css') }}"/>
+
+<script src="{{ asset('public/js/tags-input.js') }}" type="text/javascript"></script>
+<script>
+    var substringMatcher = function(strs) {
+        return function findMatches(q, cb) {
+            var matches, substringRegex;
+            matches = [];
+            substrRegex = new RegExp(q, 'i');
+            $.each(strs, function(i, str) {
+                if (substrRegex.test(str)) {
+                    matches.push(str);
+                }
+            });
+
+            cb(matches);
+        };
+    };
+
+    var villes = ['Ariana',
+        'Béja',
+        'Ben Arous',
+        'Bizerte',
+        'Gabes',
+        'Mahdia',
+        'Médenine',
+        'Monastir',
+        'Nabeul',
+        'Sfax',
+        'Sidi Bouzid',
+        'Siliana',
+        'Sousse',
+        'Tataouine',
+        'Tozeur',
+        'Tunis',
+        'Zaghouan',
+        'Jendouba',
+        'Kairouan',
+        'Kasserine',
+        'Kebili',
+        'La Manouba',
+        'Le Kef',
+    ];
+    var pays=[
+
+        'Tunisie',
+
+       ];
+
+    $('.typeahead').typeahead({
+            hint: true,
+            highlight: true,
+            minLength: 1
+        },
+        {
+            name: 'villes',
+            source: substringMatcher(villes)
+        });
+    $('.typeahead1').typeahead({
+            hint: true,
+            highlight: true,
+            minLength: 1
+        },
+        {
+            name: 'pays',
+            source: substringMatcher(pays)
+        });
+</script>
+
+<script>
+
+    $("#clickme").click(function () {
+        $("#top2").hide();
+        $("#top4").hide();
+        $("#top5").hide();
+        $("#top6").hide();
+        $("#top3").hide();
+        $("#toppp").show();
+    });
+    $("#clickme2").click(function () {
+        $("#toppp").hide();
+        $("#top4").hide();
+        $("#top5").hide();
+        $("#top6").hide();
+        $("#top3").hide();
+        $("#top2").show();
+    });
+    $("#clickme3").click(function () {
+        $("#toppp").hide();
+        $("#top2").hide();
+        $("#top4").hide();
+        $("#top5").hide();
+        $("#top6").hide();
+        $("#top3").show();
+    });
+    $("#clickme4").click(function () {
+        $("#toppp").hide();
+        $("#top2").hide();
+        $("#top3").hide();
+        $("#top5").hide();
+        $("#top6").hide();
+        $("#top4").show();
+    });
+
+    $("#clickme5").click(function () {
+        $("#toppp").hide();
+        $("#top2").hide();
+        $("#top4").hide();
+        $("#top3").hide();
+        $("#top6").hide();
+        $("#top5").show();
+    });
+    $("#clickme6").click(function () {
+        $("#toppp").hide();
+        $("#top2").hide();
+        $("#top4").hide();
+        $("#top3").hide();
+        $("#top5").hide();
+        $("#top6").show();
+    });
+</script>
+
+<link rel="stylesheet" type="text/css" href="{{ asset('lol/css/bootstrap-datepicker.css') }}"/>
+<script src="{{ asset('lol/js/bootstrap-datepicker.js') }}" type="text/javascript"></script>
+<script>
+    $(function () {
+        $('.datepicker').datepicker({ format: 'mm-dd-yyyy'}
+
+        );
+    });
+</script>
+{#<link rel="stylesheet" type="text/css" href="{{ asset('lol/css/bootstrap-datepicker.css') }}"/>
+<script src="{{ asset('lol/js/bootstrap-datepicker.js') }}" type="text/javascript"></script>
+<script>
+    $(function () {
+        $('.datepicker').datepicker(
+
+      );
+    });
+
+</script>#}
+</body>
+</html>
+
+

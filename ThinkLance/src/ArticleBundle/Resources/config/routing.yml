@@ -1,0 +1,87 @@
+article_homepage:
+    path:     /
+    defaults: { _controller: ArticleBundle:Article:index }
+
+liste_articles:
+    path:     /liste
+    defaults: { _controller: ArticleBundle:Article:listeArticles }
+
+liste_articles_api:
+    path:     /liste_api
+    defaults: { _controller: ArticleBundle:Article:listeArticlesApi }
+
+mes_articles:
+    path:     /mes_articles
+    defaults: { _controller: ArticleBundle:Article:maListeArticles }
+
+mes_articles_api:
+    path:     /mes_articles_api/{idUserConnecte}
+    defaults: { _controller: ArticleBundle:Article:maListeArticlesApi }
+
+lire_article:
+    path:     /article/{id}
+    defaults: { _controller: ArticleBundle:Article:afficherArticle }
+
+lire_article_api:
+    path:     /article_api/{id}
+    defaults: { _controller: ArticleBundle:Article:afficherArticleApi }
+
+ajouter_article:
+    path:     /ajouter_article
+    defaults: { _controller: ArticleBundle:Article:ajouterArticle }
+
+ajouter_article_api:
+    path:     /ajouter_article_api/{idUser}
+    defaults: { _controller: ArticleBundle:Article:ajouterArticleApi }
+
+modifier_article:
+    path:     /modifier_article/{id}
+    defaults: { _controller: ArticleBundle:Article:modifierArticle }
+
+modifier_article_api:
+    path:     /modifier_article_api/{id}
+    defaults: { _controller: ArticleBundle:Article:modifierArticleApi }
+
+supprimer_article:
+    path:     /supprimer_article/{id}
+    defaults: { _controller: ArticleBundle:Article:supprimerArticle }
+
+supprimer_article_api:
+    path:     /supprimer_article_api/{id}
+    defaults: { _controller: ArticleBundle:Article:supprimerArticleApi }
+
+ajouter_type_article:
+    path:     /ajouter_type_article
+    defaults: { _controller: ArticleBundle:TypeArticle:ajouterTypeArticle }
+
+modifier_type_article:
+    path:     /modifier_type_article/{id}
+    defaults: { _controller: ArticleBundle:TypeArticle:modifierTypeArticle }
+
+supprimer_type_article:
+    path:     /supprimer_type_article/{id}
+    defaults: { _controller: ArticleBundle:TypeArticle:supprimerTypeArticle }
+
+lister_types_articles:
+    path:     /lister_types_articles
+    defaults: { _controller: ArticleBundle:TypeArticle:listerTypesArticles }
+
+lister_types_articles_api:
+    path:     /lister_types_articles_api
+    defaults: { _controller: ArticleBundle:TypeArticle:listerTypesArticlesApi }
+
+id_type_article_specifique_api:
+    path:     /get_id_typearticle_specifique_api/{nomTypeArticle}
+    defaults: { _controller: ArticleBundle:TypeArticle:getIdTypeArticleSpecifiqueApi }
+
+search_par_id_type_articles_api:
+    path:     /search_type_article_id_api/{idCle}
+    defaults: { _controller: ArticleBundle:TypeArticle:rechecherTypeArticleParIdApi }
+
+search_nom_articles:
+    path:     /search_article_nom
+    defaults: { _controller: ArticleBundle:Article:rechecherArticleParNom }
+
+search_par_nom_articles_api:
+    path:     /search_article_nom_api/{nomMotCle}
+    defaults: { _controller: ArticleBundle:Article:rechecherArticleParNomApi }
